@@ -1,17 +1,3 @@
-# == Schema Information
-#
-# Table name: pug_sub_api_sub_api_feed_updateds
-#
-#  id                  :bigint           not null, primary key
-#  pug_evm_log_id      :bigint           not null
-#  pug_evm_contract_id :bigint           not null
-#  pug_network_id      :bigint           not null
-#  e_beacon_id         :string
-#  e_msg_root_count    :decimal(78, )
-#  e_msg_root_root     :string
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#
 class Pug::SubApiSubApiFeedUpdated < ApplicationRecord
   belongs_to :pug_evm_log, class_name: 'Pug::EvmLog'
   alias evm_log pug_evm_log

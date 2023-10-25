@@ -1,16 +1,3 @@
-# == Schema Information
-#
-# Table name: pug_oracle_set_approveds
-#
-#  id                  :bigint           not null, primary key
-#  pug_evm_log_id      :bigint           not null
-#  pug_evm_contract_id :bigint           not null
-#  pug_network_id      :bigint           not null
-#  e_operator          :string
-#  e_approve           :boolean
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#
 class Pug::OracleSetApproved < ApplicationRecord
   belongs_to :pug_evm_log, class_name: 'Pug::EvmLog'
   alias evm_log pug_evm_log

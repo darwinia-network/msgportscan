@@ -37,7 +37,7 @@ def check_failed_messages
   messages = Message.where(status: :failed)
   messages.each do |message|
     # CHECK IF CLEARED
-    clear_event = Pug::OrmpClearFailedMessage.find_by(e_msg_hash: message.msg_hash)
+    clear_event = Pug::OrmpClearFailedMessage.find_by(msg_hash: message.msg_hash)
     next unless clear_event
 
     message.clear_transaction_hash = clear_event.evm_log.transaction_hash
@@ -78,13 +78,13 @@ end
 def check_root_ready_messages
   messages = Message.where(status: :root_ready)
   messages.each do |message|
-    dispatch_event = Pug::OrmpMessageDispatched.find_by(e_msg_hash: message.msg_hash)
+    dispatch_event = Pug::OrmpMessageDispatched.find_by(msg_hash: message.msg_hash)
     next if dispatch_event.nil?
 
     message.dispatch_transaction_hash = dispatch_event.evm_log.transaction_hash
     message.dispatch_block_number = dispatch_event.evm_log.block_number
     message.dispatch_block_timestamp = dispatch_event.evm_log.timestamp
-    message.status = if dispatch_event.e_dispatch_result
+    message.status = if dispatch_event.dispatch_result
                        Message.statuses[:dispatch_success]
                      else
                        Message.statuses[:dispatch_failed]
@@ -116,21 +116,21 @@ def sync_accepted_messages(network)
 
     ActiveRecord::Base.transaction do
       message = Message.create!(
-        msg_hash: event.e_msg_hash,
-        root: event.e_root,
-        channel: event.e_message_channel,
-        index: event.e_message_index,
-        from_chain_id: event.e_message_from_chain_id,
-        from: event.e_message_from,
-        to_chain_id: event.e_message_to_chain_id,
-        to: event.e_message_to,
-        encoded: event.e_message_encoded,
+        msg_hash: event.msg_hash,
+        root: event.root,
+        channel: event.message_channel,
+        index: event.message_index,
+        from_chain_id: event.message_from_chain_id,
+        from: event.message_from,
+        to_chain_id: event.message_to_chain_id,
+        to: event.message_to,
+        encoded: event.message_encoded,
         block_number: event.evm_log.block_number,
         block_timestamp: event.evm_log.timestamp,
         transaction_hash: event.evm_log.transaction_hash,
         status: :accepted,
         from_network: network,
-        to_network: Pug::Network.find_by_chain_id(event.e_message_to_chain_id)
+        to_network: Pug::Network.find_by_chain_id(event.message_to_chain_id)
       )
       raise "message created failed: #{message.errors.full_messages}" if message.errors.any?
     end
@@ -139,7 +139,7 @@ end
 
 def skip_message?(message_accepted_event, network)
   # create message if not exists
-  return true if Message.find_by(from_network: network, msg_hash: message_accepted_event.e_msg_hash)
+  return true if Message.find_by(from_network: network, msg_hash: message_accepted_event.msg_hash)
 
   false
 end
@@ -148,5 +148,5 @@ def latest_message_accepted_events(network)
   last_message_index = Message.where(from_network: network).maximum(:index) || -1
   puts "  from `#{network.display_name}`s message index: #{last_message_index + 1}"
 
-  Pug::OrmpMessageAccepted.where(pug_network: network).where('e_message_index > ?', last_message_index)
+  Pug::OrmpMessageAccepted.where(pug_network: network).where('message_index > ?', last_message_index)
 end

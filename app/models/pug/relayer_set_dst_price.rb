@@ -1,17 +1,3 @@
-# == Schema Information
-#
-# Table name: pug_relayer_set_dst_prices
-#
-#  id                     :bigint           not null, primary key
-#  pug_evm_log_id         :bigint           not null
-#  pug_evm_contract_id    :bigint           not null
-#  pug_network_id         :bigint           not null
-#  e_chain_id             :decimal(78, )
-#  e_dst_price_ratio      :decimal(39, )
-#  e_dst_gas_price_in_wei :decimal(39, )
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#
 class Pug::RelayerSetDstPrice < ApplicationRecord
   belongs_to :pug_evm_log, class_name: 'Pug::EvmLog'
   alias evm_log pug_evm_log
