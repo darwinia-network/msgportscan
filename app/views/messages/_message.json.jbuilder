@@ -1,0 +1,2 @@
+json.extract! message, :id, :index, :msg_hash, :root, :channel, :from_chain_id, :from, :to_chain_id, :to, :block_number, :block_timestamp, :transaction_hash, :status, :encoded, :from_network_id, :to_network_id, :dispatch_transaction_hash, :dispatch_block_number, :dispatch_block_timestamp, :clear_transaction_hash, :clear_block_number, :clear_block_timestamp, :created_at, :updated_at
+json.url message_url(message, format: :json)

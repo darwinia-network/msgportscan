@@ -15,7 +15,7 @@
 #  block_timestamp           :integer
 #  transaction_hash          :string
 #  status                    :integer
-#  encoded                   :string
+#  encoded                   :text
 #  from_network_id           :integer
 #  to_network_id             :integer
 #  dispatch_transaction_hash :string
@@ -46,5 +46,13 @@ class Message < ApplicationRecord
     else
       'Unknown'
     end
+  end
+
+  def identifier
+    "#{from_network.name}_#{to_network.name}_#{index}"
+  end
+
+  def direction
+    "#{from_network.name.camelize}-#{to_network.name.camelize}"
   end
 end
