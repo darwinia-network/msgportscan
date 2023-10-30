@@ -46,7 +46,7 @@ services:
       - REDIS_URL=redis://redis:6379/0
       - DB_HOST=pg
       - DB_USERNAME=postgres
-      - DB_PASSWORD=password
+      - POSTGRES_PASSWORD=password
 
 volumes:
   redis:
