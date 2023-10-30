@@ -70,5 +70,5 @@ group :test do
 end
 
 gem 'annotate', '~> 3.2'
-gem 'eth', path: '/workspaces/eth.rb'
-gem 'pug', path: '/workspaces/pug'
+gem 'eth', github: 'wuminzhe/eth.rb'
+gem 'pug', github: 'wuminzhe/pug'
