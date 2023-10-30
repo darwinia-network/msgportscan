@@ -3,5 +3,6 @@
 @tailwind utilities;
 
 html, body {
- font-family: 'IBM Plex Mono', monospace;
+ font-family: 'Overpass Mono', monospace;
+ background-color: rgb(252, 251, 248);
 }

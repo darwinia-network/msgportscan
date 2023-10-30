@@ -4,13 +4,16 @@ class FillPugNetworks < ActiveRecord::Migration[7.1]
     require 'open-uri'
     require 'json'
 
-    networks = JSON.parse(URI.open('https://chainid.network/chains_mini.json').read)
+    networks = JSON.parse(URI.open('https://chainid.network/chains.json').read)
     networks.each do |network|
+      rpc_url = network['rpc']&.select { |url| url.start_with?('http') && url !~ /\$\{(.+)\}/ }&.first
+      explorer_url = network['explorers']&.first&.[]('url')
       Pug::Network.create(
         chain_id: network['chainId'],
         name: network['shortName'].underscore,
         display_name: network['name'],
-        rpc_list: network['rpc'],
+        rpc: rpc_url,
+        explorer: explorer_url,
         scan_span: 5000
       )
     end

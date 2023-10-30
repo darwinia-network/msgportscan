@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_26_032529) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -82,12 +82,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_032529) do
     t.bigint "chain_id"
     t.string "name"
     t.string "display_name"
+    t.string "rpc"
+    t.string "explorer"
     t.integer "scan_span", default: 5000
     t.integer "last_scanned_block", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "explorer"
-    t.string "rpc"
   end
 
   create_table "pug_oracle_assigneds", force: :cascade do |t|

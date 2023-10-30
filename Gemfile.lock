@@ -10,9 +10,8 @@ GIT
       rbsecp256k1 (~> 6.0)
       scrypt (~> 3.0)
 
-GIT
-  remote: https://github.com/wuminzhe/pug.git
-  revision: 1765d4fd58925db46fe8ad528c7fb0ae4cad7272
+PATH
+  remote: /workspaces/pug
   specs:
     pug (0.1.0)
       rails (>= 7.1.1)
@@ -220,7 +219,7 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
-    rake (13.0.6)
+    rake (13.1.0)
     rbsecp256k1 (6.0.0)
       mini_portile2 (~> 2.8)
       pkg-config (~> 1.5)

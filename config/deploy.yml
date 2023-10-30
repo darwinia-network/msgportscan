@@ -43,8 +43,8 @@ registry:
 # Inject ENV variables into containers (secrets come from .env).
 env:
   clear:
-    DB_HOST: host.docker.internal
-    DB_USERNAME: postgres
+    POSTGRES_HOST: host.docker.internal
+    POSTGRES_USERNAME: postgres
     RAILS_SERVE_STATIC_FILES: true
     REDIS_URL: redis://host.docker.internal:6379/0
   secret:
