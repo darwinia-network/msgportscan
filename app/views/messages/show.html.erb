@@ -1,10 +1,11 @@
-<p style="color: green"><%= notice %></p>
+<%= turbo_stream_from("message") %>
 
-<%= render @message %>
+<div class="mx-auto md:w-2/3 w-full flex">
+  <div class="mx-auto">
+    <% if notice.present? %>
+      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+    <% end %>
 
-<div>
-  <%= link_to "Edit this message", edit_message_path(@message) %> |
-  <%= link_to "Back to messages", messages_path %>
-
-  <%= button_to "Destroy this message", @message, method: :delete %>
+    <%= render "show_message", message: @message %>
+  </div>
 </div>

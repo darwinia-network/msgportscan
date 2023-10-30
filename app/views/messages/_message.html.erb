@@ -1,10 +1,10 @@
   <tr id="<%= dom_id message %>" class="border-b dark:border-neutral-500">
     <td class="whitespace-nowrap px-6 py-2"><%= Time.at(message.block_timestamp) %></td>
     <td class="whitespace-nowrap px-6 py-2"><%= message.direction %></td>
-    <td class="whitespace-nowrap px-6 py-2 font-medium"><%= message.index %></td>
+    <td class="whitespace-nowrap px-6 py-2"><%= link_to message.index, network_message_path(message.from_network.name, message.index), class: "underline" %></td>
     <td class="whitespace-nowrap px-6 py-2"><%= block_link(message.from_network, message.block_number) %></td>
-    <td class="whitespace-nowrap px-6 py-2"><%= md_short(message.msg_hash) %></td>
-    <td class="whitespace-nowrap px-6 py-2"><%= md_short(message.root) %></td>
+    <td class="whitespace-nowrap px-6 py-2"><%= short(message.msg_hash) %></td>
+    <td class="whitespace-nowrap px-6 py-2"><%= short(message.root) %></td>
     <td class="whitespace-nowrap px-6 py-2"><%= address_link_short(message.from_network, message.from) %></td>
     <td class="whitespace-nowrap px-6 py-2"><%= address_link_short(message.to_network, message.to) %></td>
     <td class="whitespace-nowrap px-6 py-2">
@@ -12,5 +12,5 @@
         <%= message.status_label %>
       </div>
     </td>
-    <td class="whitespace-nowrap px-6 py-2"><%= link_to "Detail", message, class: "underline" %></td>
+    <td class="whitespace-nowrap px-6 py-2"><%= link_to "Detail", network_message_path(message.from_network.name, message.index), class: "underline" %></td>
   </tr>

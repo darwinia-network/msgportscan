@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
@@ -12,6 +15,15 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="flex flex-col">
+      <header class="p-4 pt-10 text-4xl text-center" style="font-family: 'Bebas Neue', sans-serif;">
+        <a href="/">ORMP Messages Explorer</a>
+      </header>
+      <main class="h-90 flex-1 px-4">
+        <%= yield %>
+      </main>
+      <footer class="p-4 text-sm text-center">© 2023 <a href="https://darwinia.network/">Darwinia</a>.</footer>
+    </div>
+
   </body>
 </html>
