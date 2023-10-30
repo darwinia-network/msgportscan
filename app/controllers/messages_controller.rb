@@ -17,8 +17,9 @@ class MessagesController < ApplicationController
       if params[:id].present?
         Message.find(params[:id])
       else
-        network = Pug::Network.find_by(name: params[:network])
-        Message.find_by(from_network: network, index: params[:index])
+        from_network = Pug::Network.find_by(name: params[:from_network])
+        to_network = Pug::Network.find_by(name: params[:to_network])
+        Message.find_by(from_network:, to_network:, index: params[:index])
       end
 
     return unless @message.nil?
