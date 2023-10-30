@@ -70,7 +70,7 @@ accessories:
     env:
       clear:
         POSTGRES_USER: 'postgres'
-        POSTGRES_DB: 'ormpscan_production'
+        POSTGRES_DB: 'ormpscan2_production'
       secret:
         - POSTGRES_PASSWORD
     volumes:
