@@ -64,14 +64,13 @@ builder:
 # Use accessory services (secrets come from .env).
 accessories:
   db:
-    image: postgres:14-alpine
+    image: postgres:16-alpine
     host: 123.58.217.13
     port: 5432
     env:
       clear:
         POSTGRES_USER: 'postgres'
         POSTGRES_DB: 'ormpscan2_production'
-        POSTGRES_HOST_AUTH_METHOD: 'trust'
       secret:
         - POSTGRES_PASSWORD
     volumes:
