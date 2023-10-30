@@ -1,8 +1,8 @@
 # Name of your application. Used to uniquely configure containers.
-service: ormpscan
+service: ormpscan2
 
 # Name of the container image.
-image: wuminzhe/ormpscan
+image: wuminzhe/ormpscan2
 
 # Deploy to these servers.
 servers:
