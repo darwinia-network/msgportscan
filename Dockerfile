@@ -19,7 +19,7 @@ FROM base as build
 
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential curl git libpq-dev libvips node-gyp pkg-config python-is-python3 autoconf
+    apt-get install --no-install-recommends -y build-essential curl git libpq-dev libvips node-gyp pkg-config python-is-python3 autoconf libsecp256k1-dev
 
 # Install JavaScript dependencies
 ARG NODE_VERSION=18.17.1
