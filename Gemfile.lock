@@ -10,8 +10,9 @@ GIT
       rbsecp256k1 (~> 6.0)
       scrypt (~> 3.0)
 
-PATH
-  remote: /workspaces/pug
+GIT
+  remote: https://github.com/wuminzhe/pug.git
+  revision: 3056e7ec614390e62fbce908579e57f860d927a8
   specs:
     pug (0.1.0)
       rails (>= 7.1.1)
