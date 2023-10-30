@@ -96,17 +96,10 @@ end
 def check_accepted_messages
   messages = Message.where(status: :accepted)
   messages.each do |message|
-    next unless root_prepared?(message)
+    next unless message.root_prepared?
 
     message.update(status: :root_ready)
   end
-end
-
-def root_prepared?(message)
-  latest_aggregated_event = Pug::SubApiAggregatedOrmpDatum.where(pug_network: message.to_network).order(created_at: :desc).first
-  return false if latest_aggregated_event.nil?
-
-  message.block_number <= latest_aggregated_event.evm_log.block_number
 end
 
 def sync_accepted_messages(network)

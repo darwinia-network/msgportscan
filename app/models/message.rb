@@ -55,4 +55,11 @@ class Message < ApplicationRecord
   def direction
     "#{from_network.name.camelize}-#{to_network.name.camelize}"
   end
+
+  def root_prepared?
+    latest_aggregated = Pug::SubApiAggregatedOrmpDatum.where(pug_network: to_network).order(created_at: :desc).first
+    return false if latest_aggregated.nil?
+
+    block_number <= latest_aggregated.evm_log.block_number
+  end
 end
