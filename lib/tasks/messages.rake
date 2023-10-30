@@ -19,15 +19,14 @@ namespace :messages do
       puts 'check failed messages'
       check_failed_messages
 
-      puts 'sleep 10 seconds'
+      puts 'sleep 2 seconds'
       puts "\n"
-      sleep 10
+      sleep 2
     rescue StandardError => e
       puts e
       puts e.backtrace.join("\n")
 
-      # Sleep 10 seconds, then repeat
-      sleep 10
+      sleep 2
     end
   end
 end
