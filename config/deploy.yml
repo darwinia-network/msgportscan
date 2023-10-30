@@ -71,9 +71,9 @@ accessories:
       clear:
         POSTGRES_USER: 'postgres'
         POSTGRES_DB: 'ormpscan2_production'
+        POSTGRES_HOST_AUTH_METHOD: 'trust'
       secret:
         - POSTGRES_PASSWORD
-        - POSTGRES_HOST_AUTH_METHOD
     volumes:
       - postgres:/var/lib/postgresql/data
   redis:
