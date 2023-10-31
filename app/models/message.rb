@@ -57,7 +57,7 @@ class Message < ApplicationRecord
   end
 
   def root_prepared?
-    latest_aggregated = Pug::SubApiAggregatedOrmpDatum.where(pug_network: to_network).order(created_at: :desc).first
+    latest_aggregated = Pug::SubApiAggregatedOrmpDatum.where(pug_network: to_network).order(timestamp: :desc).first
     return false if latest_aggregated.nil?
 
     block_number <= latest_aggregated.evm_log.block_number
