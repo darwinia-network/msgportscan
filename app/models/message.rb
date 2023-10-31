@@ -66,6 +66,7 @@ class Message < ApplicationRecord
     return false if latest_aggregated.nil?
 
     message_of_root = Message.find_by_root(latest_aggregated.ormp_data_root)
+    return false if message_of_root.nil?
 
     block_number <= message_of_root.block_number
   end

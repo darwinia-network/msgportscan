@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_31_075533) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -96,14 +96,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.bigint "pug_network_id", null: false
     t.string "msg_hash"
     t.decimal "fee", precision: 78
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["fee"], name: "index_pug_oracle_assigneds_on_fee"
-    t.index ["msg_hash"], name: "index_pug_oracle_assigneds_on_msg_hash"
     t.index ["pug_evm_contract_id"], name: "index_pug_oracle_assigneds_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_oracle_assigneds_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_f0df60903d", unique: true
+    t.index ["pug_network_id", "fee"], name: "index_pug_oracle_assigneds_on_pug_network_id_and_fee"
+    t.index ["pug_network_id", "msg_hash"], name: "index_pug_oracle_assigneds_on_pug_network_id_and_msg_hash"
     t.index ["pug_network_id"], name: "index_pug_oracle_assigneds_on_pug_network_id"
   end
 
@@ -113,14 +116,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.bigint "pug_network_id", null: false
     t.string "operator"
     t.boolean "approve"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["approve"], name: "index_pug_oracle_set_approveds_on_approve"
-    t.index ["operator"], name: "index_pug_oracle_set_approveds_on_operator"
     t.index ["pug_evm_contract_id"], name: "index_pug_oracle_set_approveds_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_oracle_set_approveds_on_pug_evm_log_id"
+    t.index ["pug_network_id", "approve"], name: "index_pug_oracle_set_approveds_on_pug_network_id_and_approve"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_dbc1616209", unique: true
+    t.index ["pug_network_id", "operator"], name: "index_pug_oracle_set_approveds_on_pug_network_id_and_operator"
     t.index ["pug_network_id"], name: "index_pug_oracle_set_approveds_on_pug_network_id"
   end
 
@@ -130,14 +136,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.bigint "pug_network_id", null: false
     t.decimal "chain_id", precision: 78
     t.string "dapi"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["chain_id"], name: "index_pug_oracle_set_dapis_on_chain_id"
-    t.index ["dapi"], name: "index_pug_oracle_set_dapis_on_dapi"
     t.index ["pug_evm_contract_id"], name: "index_pug_oracle_set_dapis_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_oracle_set_dapis_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_35647beda6", unique: true
+    t.index ["pug_network_id", "chain_id"], name: "index_pug_oracle_set_dapis_on_pug_network_id_and_chain_id"
+    t.index ["pug_network_id", "dapi"], name: "index_pug_oracle_set_dapis_on_pug_network_id_and_dapi"
     t.index ["pug_network_id"], name: "index_pug_oracle_set_dapis_on_pug_network_id"
   end
 
@@ -147,14 +156,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.bigint "pug_network_id", null: false
     t.decimal "chain_id", precision: 78
     t.decimal "fee", precision: 78
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["chain_id"], name: "index_pug_oracle_set_fees_on_chain_id"
-    t.index ["fee"], name: "index_pug_oracle_set_fees_on_fee"
     t.index ["pug_evm_contract_id"], name: "index_pug_oracle_set_fees_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_oracle_set_fees_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_c24f05a513", unique: true
+    t.index ["pug_network_id", "chain_id"], name: "index_pug_oracle_set_fees_on_pug_network_id_and_chain_id"
+    t.index ["pug_network_id", "fee"], name: "index_pug_oracle_set_fees_on_pug_network_id_and_fee"
     t.index ["pug_network_id"], name: "index_pug_oracle_set_fees_on_pug_network_id"
   end
 
@@ -165,16 +177,19 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.string "ua"
     t.string "oracle"
     t.string "relayer"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["oracle"], name: "index_pug_ormp_app_config_updateds_on_oracle"
     t.index ["pug_evm_contract_id"], name: "index_pug_ormp_app_config_updateds_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_ormp_app_config_updateds_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_2b01289eec", unique: true
+    t.index ["pug_network_id", "oracle"], name: "idx_on_pug_network_id_oracle_d0cd39ee84"
+    t.index ["pug_network_id", "relayer"], name: "idx_on_pug_network_id_relayer_69c0165f01"
+    t.index ["pug_network_id", "ua"], name: "index_pug_ormp_app_config_updateds_on_pug_network_id_and_ua"
     t.index ["pug_network_id"], name: "index_pug_ormp_app_config_updateds_on_pug_network_id"
-    t.index ["relayer"], name: "index_pug_ormp_app_config_updateds_on_relayer"
-    t.index ["ua"], name: "index_pug_ormp_app_config_updateds_on_ua"
   end
 
   create_table "pug_ormp_clear_failed_messages", force: :cascade do |t|
@@ -182,13 +197,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.bigint "pug_evm_contract_id", null: false
     t.bigint "pug_network_id", null: false
     t.string "msg_hash"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["msg_hash"], name: "index_pug_ormp_clear_failed_messages_on_msg_hash"
     t.index ["pug_evm_contract_id"], name: "index_pug_ormp_clear_failed_messages_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_ormp_clear_failed_messages_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_cf1cf4bd32", unique: true
+    t.index ["pug_network_id", "msg_hash"], name: "idx_on_pug_network_id_msg_hash_4385c7ae0b"
     t.index ["pug_network_id"], name: "index_pug_ormp_clear_failed_messages_on_pug_network_id"
   end
 
@@ -205,22 +223,25 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.decimal "message_to_chain_id", precision: 78
     t.string "message_to"
     t.string "message_encoded"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["message_channel"], name: "index_pug_ormp_message_accepteds_on_message_channel"
-    t.index ["message_encoded"], name: "index_pug_ormp_message_accepteds_on_message_encoded"
-    t.index ["message_from"], name: "index_pug_ormp_message_accepteds_on_message_from"
-    t.index ["message_from_chain_id"], name: "index_pug_ormp_message_accepteds_on_message_from_chain_id"
-    t.index ["message_index"], name: "index_pug_ormp_message_accepteds_on_message_index"
-    t.index ["message_to"], name: "index_pug_ormp_message_accepteds_on_message_to"
-    t.index ["message_to_chain_id"], name: "index_pug_ormp_message_accepteds_on_message_to_chain_id"
-    t.index ["msg_hash"], name: "index_pug_ormp_message_accepteds_on_msg_hash"
     t.index ["pug_evm_contract_id"], name: "index_pug_ormp_message_accepteds_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_ormp_message_accepteds_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_7c0e6d0e21", unique: true
+    t.index ["pug_network_id", "message_channel"], name: "idx_on_pug_network_id_message_channel_9fcbfce120"
+    t.index ["pug_network_id", "message_encoded"], name: "idx_on_pug_network_id_message_encoded_a8264b4473"
+    t.index ["pug_network_id", "message_from"], name: "idx_on_pug_network_id_message_from_b377f3ea44"
+    t.index ["pug_network_id", "message_from_chain_id"], name: "idx_on_pug_network_id_message_from_chain_id_4a514658c0"
+    t.index ["pug_network_id", "message_index"], name: "idx_on_pug_network_id_message_index_651bf9858b"
+    t.index ["pug_network_id", "message_to"], name: "idx_on_pug_network_id_message_to_66672a857b"
+    t.index ["pug_network_id", "message_to_chain_id"], name: "idx_on_pug_network_id_message_to_chain_id_04c24c674f"
+    t.index ["pug_network_id", "msg_hash"], name: "idx_on_pug_network_id_msg_hash_512c191bd5"
+    t.index ["pug_network_id", "root"], name: "index_pug_ormp_message_accepteds_on_pug_network_id_and_root"
     t.index ["pug_network_id"], name: "index_pug_ormp_message_accepteds_on_pug_network_id"
-    t.index ["root"], name: "index_pug_ormp_message_accepteds_on_root"
   end
 
   create_table "pug_ormp_message_dispatcheds", force: :cascade do |t|
@@ -229,14 +250,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.bigint "pug_network_id", null: false
     t.string "msg_hash"
     t.boolean "dispatch_result"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["dispatch_result"], name: "index_pug_ormp_message_dispatcheds_on_dispatch_result"
-    t.index ["msg_hash"], name: "index_pug_ormp_message_dispatcheds_on_msg_hash"
     t.index ["pug_evm_contract_id"], name: "index_pug_ormp_message_dispatcheds_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_ormp_message_dispatcheds_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_3352e95027", unique: true
+    t.index ["pug_network_id", "dispatch_result"], name: "idx_on_pug_network_id_dispatch_result_3375b9f83f"
+    t.index ["pug_network_id", "msg_hash"], name: "idx_on_pug_network_id_msg_hash_33a7665886"
     t.index ["pug_network_id"], name: "index_pug_ormp_message_dispatcheds_on_pug_network_id"
   end
 
@@ -246,14 +270,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.bigint "pug_network_id", null: false
     t.string "msg_hash"
     t.boolean "dispatch_result"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["dispatch_result"], name: "index_pug_ormp_retry_failed_messages_on_dispatch_result"
-    t.index ["msg_hash"], name: "index_pug_ormp_retry_failed_messages_on_msg_hash"
     t.index ["pug_evm_contract_id"], name: "index_pug_ormp_retry_failed_messages_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_ormp_retry_failed_messages_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_cd44786f9d", unique: true
+    t.index ["pug_network_id", "dispatch_result"], name: "idx_on_pug_network_id_dispatch_result_d4f198b26f"
+    t.index ["pug_network_id", "msg_hash"], name: "idx_on_pug_network_id_msg_hash_71e8fcc03b"
     t.index ["pug_network_id"], name: "index_pug_ormp_retry_failed_messages_on_pug_network_id"
   end
 
@@ -263,15 +290,18 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.bigint "pug_network_id", null: false
     t.string "oracle"
     t.string "relayer"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["oracle"], name: "index_pug_ormp_set_default_configs_on_oracle"
     t.index ["pug_evm_contract_id"], name: "index_pug_ormp_set_default_configs_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_ormp_set_default_configs_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_f36d2aa15c", unique: true
+    t.index ["pug_network_id", "oracle"], name: "idx_on_pug_network_id_oracle_90a88e2d35"
+    t.index ["pug_network_id", "relayer"], name: "idx_on_pug_network_id_relayer_7ed99b847d"
     t.index ["pug_network_id"], name: "index_pug_ormp_set_default_configs_on_pug_network_id"
-    t.index ["relayer"], name: "index_pug_ormp_set_default_configs_on_relayer"
   end
 
   create_table "pug_relayer_assigneds", force: :cascade do |t|
@@ -282,16 +312,19 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.decimal "fee", precision: 78
     t.string "params"
     t.string "proof"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["fee"], name: "index_pug_relayer_assigneds_on_fee"
-    t.index ["msg_hash"], name: "index_pug_relayer_assigneds_on_msg_hash"
-    t.index ["params"], name: "index_pug_relayer_assigneds_on_params"
-    t.index ["proof"], name: "index_pug_relayer_assigneds_on_proof"
     t.index ["pug_evm_contract_id"], name: "index_pug_relayer_assigneds_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_relayer_assigneds_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_2665d02ebb", unique: true
+    t.index ["pug_network_id", "fee"], name: "index_pug_relayer_assigneds_on_pug_network_id_and_fee"
+    t.index ["pug_network_id", "msg_hash"], name: "index_pug_relayer_assigneds_on_pug_network_id_and_msg_hash"
+    t.index ["pug_network_id", "params"], name: "index_pug_relayer_assigneds_on_pug_network_id_and_params"
+    t.index ["pug_network_id", "proof"], name: "index_pug_relayer_assigneds_on_pug_network_id_and_proof"
     t.index ["pug_network_id"], name: "index_pug_relayer_assigneds_on_pug_network_id"
   end
 
@@ -301,14 +334,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.bigint "pug_network_id", null: false
     t.string "operator"
     t.boolean "approve"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["approve"], name: "index_pug_relayer_set_approveds_on_approve"
-    t.index ["operator"], name: "index_pug_relayer_set_approveds_on_operator"
     t.index ["pug_evm_contract_id"], name: "index_pug_relayer_set_approveds_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_relayer_set_approveds_on_pug_evm_log_id"
+    t.index ["pug_network_id", "approve"], name: "index_pug_relayer_set_approveds_on_pug_network_id_and_approve"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_4fe6ff52a8", unique: true
+    t.index ["pug_network_id", "operator"], name: "index_pug_relayer_set_approveds_on_pug_network_id_and_operator"
     t.index ["pug_network_id"], name: "index_pug_relayer_set_approveds_on_pug_network_id"
   end
 
@@ -319,15 +355,18 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.decimal "chain_id", precision: 78
     t.decimal "base_gas", precision: 20
     t.decimal "gas_per_byte", precision: 20
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["base_gas"], name: "index_pug_relayer_set_dst_configs_on_base_gas"
-    t.index ["chain_id"], name: "index_pug_relayer_set_dst_configs_on_chain_id"
-    t.index ["gas_per_byte"], name: "index_pug_relayer_set_dst_configs_on_gas_per_byte"
     t.index ["pug_evm_contract_id"], name: "index_pug_relayer_set_dst_configs_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_relayer_set_dst_configs_on_pug_evm_log_id"
+    t.index ["pug_network_id", "base_gas"], name: "idx_on_pug_network_id_base_gas_52c49b6471"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_a7731c62b7", unique: true
+    t.index ["pug_network_id", "chain_id"], name: "idx_on_pug_network_id_chain_id_ace1d171ad"
+    t.index ["pug_network_id", "gas_per_byte"], name: "idx_on_pug_network_id_gas_per_byte_3e4f2801ea"
     t.index ["pug_network_id"], name: "index_pug_relayer_set_dst_configs_on_pug_network_id"
   end
 
@@ -338,15 +377,18 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.decimal "chain_id", precision: 78
     t.decimal "dst_price_ratio", precision: 39
     t.decimal "dst_gas_price_in_wei", precision: 39
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["chain_id"], name: "index_pug_relayer_set_dst_prices_on_chain_id"
-    t.index ["dst_gas_price_in_wei"], name: "index_pug_relayer_set_dst_prices_on_dst_gas_price_in_wei"
-    t.index ["dst_price_ratio"], name: "index_pug_relayer_set_dst_prices_on_dst_price_ratio"
     t.index ["pug_evm_contract_id"], name: "index_pug_relayer_set_dst_prices_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_relayer_set_dst_prices_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_a19fe34800", unique: true
+    t.index ["pug_network_id", "chain_id"], name: "idx_on_pug_network_id_chain_id_5a6e123ca8"
+    t.index ["pug_network_id", "dst_gas_price_in_wei"], name: "idx_on_pug_network_id_dst_gas_price_in_wei_28778f22ca"
+    t.index ["pug_network_id", "dst_price_ratio"], name: "idx_on_pug_network_id_dst_price_ratio_4f913548c5"
     t.index ["pug_network_id"], name: "index_pug_relayer_set_dst_prices_on_pug_network_id"
   end
 
@@ -359,17 +401,20 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.string "beacon_endpoint_id"
     t.string "beacon_sponsor"
     t.string "beacon_sponsor_wallet"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["beacon_airnode"], name: "index_pug_sub_api_add_beacons_on_beacon_airnode"
-    t.index ["beacon_endpoint_id"], name: "index_pug_sub_api_add_beacons_on_beacon_endpoint_id"
-    t.index ["beacon_id"], name: "index_pug_sub_api_add_beacons_on_beacon_id"
-    t.index ["beacon_sponsor"], name: "index_pug_sub_api_add_beacons_on_beacon_sponsor"
-    t.index ["beacon_sponsor_wallet"], name: "index_pug_sub_api_add_beacons_on_beacon_sponsor_wallet"
     t.index ["pug_evm_contract_id"], name: "index_pug_sub_api_add_beacons_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_sub_api_add_beacons_on_pug_evm_log_id"
+    t.index ["pug_network_id", "beacon_airnode"], name: "idx_on_pug_network_id_beacon_airnode_9eff25ae23"
+    t.index ["pug_network_id", "beacon_endpoint_id"], name: "idx_on_pug_network_id_beacon_endpoint_id_2a342930f4"
+    t.index ["pug_network_id", "beacon_id"], name: "index_pug_sub_api_add_beacons_on_pug_network_id_and_beacon_id"
+    t.index ["pug_network_id", "beacon_sponsor"], name: "idx_on_pug_network_id_beacon_sponsor_87fcc2c491"
+    t.index ["pug_network_id", "beacon_sponsor_wallet"], name: "idx_on_pug_network_id_beacon_sponsor_wallet_6b766d585b"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_bb9a992bdd", unique: true
     t.index ["pug_network_id"], name: "index_pug_sub_api_add_beacons_on_pug_network_id"
   end
 
@@ -379,14 +424,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.bigint "pug_network_id", null: false
     t.decimal "ormp_data_count", precision: 78
     t.string "ormp_data_root"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["ormp_data_count"], name: "index_pug_sub_api_aggregated_ormp_data_on_ormp_data_count"
-    t.index ["ormp_data_root"], name: "index_pug_sub_api_aggregated_ormp_data_on_ormp_data_root"
     t.index ["pug_evm_contract_id"], name: "index_pug_sub_api_aggregated_ormp_data_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_sub_api_aggregated_ormp_data_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_91466b93ef", unique: true
+    t.index ["pug_network_id", "ormp_data_count"], name: "idx_on_pug_network_id_ormp_data_count_2552497b33"
+    t.index ["pug_network_id", "ormp_data_root"], name: "idx_on_pug_network_id_ormp_data_root_997f2b58ab"
     t.index ["pug_network_id"], name: "index_pug_sub_api_aggregated_ormp_data_on_pug_network_id"
   end
 
@@ -397,16 +445,19 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.string "beacon_id"
     t.string "request_id"
     t.string "data"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["beacon_id"], name: "index_pug_sub_api_airnode_rrp_completeds_on_beacon_id"
-    t.index ["data"], name: "index_pug_sub_api_airnode_rrp_completeds_on_data"
     t.index ["pug_evm_contract_id"], name: "idx_on_pug_evm_contract_id_7d68e35ef3"
     t.index ["pug_evm_log_id"], name: "index_pug_sub_api_airnode_rrp_completeds_on_pug_evm_log_id"
+    t.index ["pug_network_id", "beacon_id"], name: "idx_on_pug_network_id_beacon_id_3af508e00e"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_8cc4699a17", unique: true
+    t.index ["pug_network_id", "data"], name: "idx_on_pug_network_id_data_07f25ec1ea"
+    t.index ["pug_network_id", "request_id"], name: "idx_on_pug_network_id_request_id_350af8cbfe"
     t.index ["pug_network_id"], name: "index_pug_sub_api_airnode_rrp_completeds_on_pug_network_id"
-    t.index ["request_id"], name: "index_pug_sub_api_airnode_rrp_completeds_on_request_id"
   end
 
   create_table "pug_sub_api_airnode_rrp_requesteds", force: :cascade do |t|
@@ -415,15 +466,18 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.bigint "pug_network_id", null: false
     t.string "beacon_id"
     t.string "request_id"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["beacon_id"], name: "index_pug_sub_api_airnode_rrp_requesteds_on_beacon_id"
     t.index ["pug_evm_contract_id"], name: "idx_on_pug_evm_contract_id_7f90448c42"
     t.index ["pug_evm_log_id"], name: "index_pug_sub_api_airnode_rrp_requesteds_on_pug_evm_log_id"
+    t.index ["pug_network_id", "beacon_id"], name: "idx_on_pug_network_id_beacon_id_afbb7dfa75"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_6ae83b5263", unique: true
+    t.index ["pug_network_id", "request_id"], name: "idx_on_pug_network_id_request_id_b4fa0a9353"
     t.index ["pug_network_id"], name: "index_pug_sub_api_airnode_rrp_requesteds_on_pug_network_id"
-    t.index ["request_id"], name: "index_pug_sub_api_airnode_rrp_requesteds_on_request_id"
   end
 
   create_table "pug_sub_api_ownership_transfer_starteds", force: :cascade do |t|
@@ -432,14 +486,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.bigint "pug_network_id", null: false
     t.string "previous_owner"
     t.string "new_owner"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["new_owner"], name: "index_pug_sub_api_ownership_transfer_starteds_on_new_owner"
-    t.index ["previous_owner"], name: "idx_on_previous_owner_093a3cf06e"
     t.index ["pug_evm_contract_id"], name: "idx_on_pug_evm_contract_id_07fc2e2c5b"
     t.index ["pug_evm_log_id"], name: "idx_on_pug_evm_log_id_4fb906a4ae"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_5c63a52083", unique: true
+    t.index ["pug_network_id", "new_owner"], name: "idx_on_pug_network_id_new_owner_a4736a1a27"
+    t.index ["pug_network_id", "previous_owner"], name: "idx_on_pug_network_id_previous_owner_21f668496e"
     t.index ["pug_network_id"], name: "idx_on_pug_network_id_e9d99d14c5"
   end
 
@@ -449,14 +506,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.bigint "pug_network_id", null: false
     t.string "previous_owner"
     t.string "new_owner"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["new_owner"], name: "index_pug_sub_api_ownership_transferreds_on_new_owner"
-    t.index ["previous_owner"], name: "index_pug_sub_api_ownership_transferreds_on_previous_owner"
     t.index ["pug_evm_contract_id"], name: "idx_on_pug_evm_contract_id_53307178ad"
     t.index ["pug_evm_log_id"], name: "index_pug_sub_api_ownership_transferreds_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_82f0facafc", unique: true
+    t.index ["pug_network_id", "new_owner"], name: "idx_on_pug_network_id_new_owner_f54621dd05"
+    t.index ["pug_network_id", "previous_owner"], name: "idx_on_pug_network_id_previous_owner_47c67ee6d7"
     t.index ["pug_network_id"], name: "index_pug_sub_api_ownership_transferreds_on_pug_network_id"
   end
 
@@ -465,13 +525,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.bigint "pug_evm_contract_id", null: false
     t.bigint "pug_network_id", null: false
     t.string "beacon_id"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["beacon_id"], name: "index_pug_sub_api_remove_beacons_on_beacon_id"
     t.index ["pug_evm_contract_id"], name: "index_pug_sub_api_remove_beacons_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_sub_api_remove_beacons_on_pug_evm_log_id"
+    t.index ["pug_network_id", "beacon_id"], name: "idx_on_pug_network_id_beacon_id_b89c25191a"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_5c5b820281", unique: true
     t.index ["pug_network_id"], name: "index_pug_sub_api_remove_beacons_on_pug_network_id"
   end
 
@@ -482,15 +545,18 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
     t.string "beacon_id"
     t.decimal "msg_root_count", precision: 78
     t.string "msg_root_root"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "block_number"
-    t.datetime "timestamp"
-    t.index ["beacon_id"], name: "index_pug_sub_api_sub_api_feed_updateds_on_beacon_id"
-    t.index ["msg_root_count"], name: "index_pug_sub_api_sub_api_feed_updateds_on_msg_root_count"
-    t.index ["msg_root_root"], name: "index_pug_sub_api_sub_api_feed_updateds_on_msg_root_root"
     t.index ["pug_evm_contract_id"], name: "index_pug_sub_api_sub_api_feed_updateds_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_sub_api_sub_api_feed_updateds_on_pug_evm_log_id"
+    t.index ["pug_network_id", "beacon_id"], name: "idx_on_pug_network_id_beacon_id_3da4d1e9ed"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_c9ce9155f7", unique: true
+    t.index ["pug_network_id", "msg_root_count"], name: "idx_on_pug_network_id_msg_root_count_c1de86f6b6"
+    t.index ["pug_network_id", "msg_root_root"], name: "idx_on_pug_network_id_msg_root_root_52014b84a5"
     t.index ["pug_network_id"], name: "index_pug_sub_api_sub_api_feed_updateds_on_pug_network_id"
   end
 

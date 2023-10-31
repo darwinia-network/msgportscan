@@ -6,10 +6,15 @@ class CreatePugOrmpSetDefaultConfigs < ActiveRecord::Migration[7.1]
       t.belongs_to :pug_network, null: false, foreign_key: true
       t.string :oracle
       t.string :relayer
+      t.datetime :timestamp
+      t.integer :block_number
+      t.integer :transaction_index
+      t.integer :log_index
 
       t.timestamps
     end
-    add_index :pug_ormp_set_default_configs, :oracle
-    add_index :pug_ormp_set_default_configs, :relayer
+    add_index :pug_ormp_set_default_configs, [:pug_network_id, :oracle]
+    add_index :pug_ormp_set_default_configs, [:pug_network_id, :relayer]
+    add_index :pug_ormp_set_default_configs, %i[pug_network_id block_number transaction_index log_index], unique: true
   end
 end

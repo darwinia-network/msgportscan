@@ -11,29 +11,28 @@ namespace :messages do
       end
 
       puts 'check accepted messages'
-      check_accepted_messages
+      check_accepted_messages(networks)
 
       puts 'check root ready messages'
-      check_root_ready_messages
+      check_root_ready_messages(networks)
 
       puts 'check failed messages'
-      check_failed_messages
+      check_failed_messages(networks)
 
-      puts 'sleep 2 seconds'
       puts "\n"
-      sleep 2
+      sleep 10
     rescue StandardError => e
       puts e
       puts e.backtrace.join("\n")
 
-      sleep 2
+      sleep 10
     end
   end
 end
 
 # failed -> success/failed, cleared
-def check_failed_messages
-  messages = Message.where(status: :failed)
+def check_failed_messages(networks)
+  messages = Message.where(from_network: networks, to_network: networks, status: :failed)
   messages.each do |message|
     # CHECK IF CLEARED
     clear_event = Pug::OrmpClearFailedMessage.find_by(msg_hash: message.msg_hash)
@@ -74,8 +73,8 @@ def check_failed_messages
 end
 
 # root_ready -> success/failed
-def check_root_ready_messages
-  messages = Message.where(status: :root_ready)
+def check_root_ready_messages(networks)
+  messages = Message.where(from_network: networks, to_network: networks, status: :root_ready)
   messages.each do |message|
     dispatch_event = Pug::OrmpMessageDispatched.find_by(msg_hash: message.msg_hash)
     next if dispatch_event.nil?
@@ -93,8 +92,8 @@ def check_root_ready_messages
 end
 
 # accepted -> root_ready
-def check_accepted_messages
-  messages = Message.where(status: :accepted)
+def check_accepted_messages(networks)
+  messages = Message.where(from_network: networks, to_network: networks, status: :accepted)
   messages.each do |message|
     next unless message.root_prepared?
 

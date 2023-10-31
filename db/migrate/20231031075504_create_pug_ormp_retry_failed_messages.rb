@@ -6,10 +6,15 @@ class CreatePugOrmpRetryFailedMessages < ActiveRecord::Migration[7.1]
       t.belongs_to :pug_network, null: false, foreign_key: true
       t.string :msg_hash
       t.boolean :dispatch_result
+      t.datetime :timestamp
+      t.integer :block_number
+      t.integer :transaction_index
+      t.integer :log_index
 
       t.timestamps
     end
-    add_index :pug_ormp_retry_failed_messages, :msg_hash
-    add_index :pug_ormp_retry_failed_messages, :dispatch_result
+    add_index :pug_ormp_retry_failed_messages, [:pug_network_id, :msg_hash]
+    add_index :pug_ormp_retry_failed_messages, [:pug_network_id, :dispatch_result]
+    add_index :pug_ormp_retry_failed_messages, %i[pug_network_id block_number transaction_index log_index], unique: true
   end
 end

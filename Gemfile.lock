@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/wuminzhe/pug.git
-  revision: 3056e7ec614390e62fbce908579e57f860d927a8
+  revision: 76a91b7a5dd6c21984ba890442eca3b929989910
   specs:
     pug (0.1.0)
       rails (>= 7.1.1)
@@ -160,7 +160,7 @@ GEM
     minitest (5.20.0)
     msgpack (1.7.2)
     mutex_m (0.1.2)
-    net-imap (0.4.2)
+    net-imap (0.4.3)
       date
       net-protocol
     net-pop (0.1.2)
