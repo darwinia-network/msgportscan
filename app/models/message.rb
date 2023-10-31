@@ -60,6 +60,8 @@ class Message < ApplicationRecord
     latest_aggregated = Pug::SubApiAggregatedOrmpDatum.where(pug_network: to_network).order(timestamp: :desc).first
     return false if latest_aggregated.nil?
 
-    block_number <= latest_aggregated.evm_log.block_number
+    message_of_root = Message.find_by_root(latest_aggregate.ormp_data_root)
+
+    block_number <= message_of_root.block_number
   end
 end
