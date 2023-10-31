@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_30_235154) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -98,6 +98,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.decimal "fee", precision: 78
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["fee"], name: "index_pug_oracle_assigneds_on_fee"
     t.index ["msg_hash"], name: "index_pug_oracle_assigneds_on_msg_hash"
     t.index ["pug_evm_contract_id"], name: "index_pug_oracle_assigneds_on_pug_evm_contract_id"
@@ -113,6 +115,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.boolean "approve"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["approve"], name: "index_pug_oracle_set_approveds_on_approve"
     t.index ["operator"], name: "index_pug_oracle_set_approveds_on_operator"
     t.index ["pug_evm_contract_id"], name: "index_pug_oracle_set_approveds_on_pug_evm_contract_id"
@@ -128,6 +132,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.string "dapi"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["chain_id"], name: "index_pug_oracle_set_dapis_on_chain_id"
     t.index ["dapi"], name: "index_pug_oracle_set_dapis_on_dapi"
     t.index ["pug_evm_contract_id"], name: "index_pug_oracle_set_dapis_on_pug_evm_contract_id"
@@ -143,6 +149,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.decimal "fee", precision: 78
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["chain_id"], name: "index_pug_oracle_set_fees_on_chain_id"
     t.index ["fee"], name: "index_pug_oracle_set_fees_on_fee"
     t.index ["pug_evm_contract_id"], name: "index_pug_oracle_set_fees_on_pug_evm_contract_id"
@@ -159,6 +167,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.string "relayer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["oracle"], name: "index_pug_ormp_app_config_updateds_on_oracle"
     t.index ["pug_evm_contract_id"], name: "index_pug_ormp_app_config_updateds_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_ormp_app_config_updateds_on_pug_evm_log_id"
@@ -174,6 +184,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.string "msg_hash"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["msg_hash"], name: "index_pug_ormp_clear_failed_messages_on_msg_hash"
     t.index ["pug_evm_contract_id"], name: "index_pug_ormp_clear_failed_messages_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_ormp_clear_failed_messages_on_pug_evm_log_id"
@@ -195,6 +207,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.string "message_encoded"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["message_channel"], name: "index_pug_ormp_message_accepteds_on_message_channel"
     t.index ["message_encoded"], name: "index_pug_ormp_message_accepteds_on_message_encoded"
     t.index ["message_from"], name: "index_pug_ormp_message_accepteds_on_message_from"
@@ -217,6 +231,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.boolean "dispatch_result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["dispatch_result"], name: "index_pug_ormp_message_dispatcheds_on_dispatch_result"
     t.index ["msg_hash"], name: "index_pug_ormp_message_dispatcheds_on_msg_hash"
     t.index ["pug_evm_contract_id"], name: "index_pug_ormp_message_dispatcheds_on_pug_evm_contract_id"
@@ -232,6 +248,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.boolean "dispatch_result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["dispatch_result"], name: "index_pug_ormp_retry_failed_messages_on_dispatch_result"
     t.index ["msg_hash"], name: "index_pug_ormp_retry_failed_messages_on_msg_hash"
     t.index ["pug_evm_contract_id"], name: "index_pug_ormp_retry_failed_messages_on_pug_evm_contract_id"
@@ -247,6 +265,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.string "relayer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["oracle"], name: "index_pug_ormp_set_default_configs_on_oracle"
     t.index ["pug_evm_contract_id"], name: "index_pug_ormp_set_default_configs_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_ormp_set_default_configs_on_pug_evm_log_id"
@@ -264,6 +284,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.string "proof"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["fee"], name: "index_pug_relayer_assigneds_on_fee"
     t.index ["msg_hash"], name: "index_pug_relayer_assigneds_on_msg_hash"
     t.index ["params"], name: "index_pug_relayer_assigneds_on_params"
@@ -281,6 +303,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.boolean "approve"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["approve"], name: "index_pug_relayer_set_approveds_on_approve"
     t.index ["operator"], name: "index_pug_relayer_set_approveds_on_operator"
     t.index ["pug_evm_contract_id"], name: "index_pug_relayer_set_approveds_on_pug_evm_contract_id"
@@ -297,6 +321,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.decimal "gas_per_byte", precision: 20
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["base_gas"], name: "index_pug_relayer_set_dst_configs_on_base_gas"
     t.index ["chain_id"], name: "index_pug_relayer_set_dst_configs_on_chain_id"
     t.index ["gas_per_byte"], name: "index_pug_relayer_set_dst_configs_on_gas_per_byte"
@@ -314,6 +340,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.decimal "dst_gas_price_in_wei", precision: 39
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["chain_id"], name: "index_pug_relayer_set_dst_prices_on_chain_id"
     t.index ["dst_gas_price_in_wei"], name: "index_pug_relayer_set_dst_prices_on_dst_gas_price_in_wei"
     t.index ["dst_price_ratio"], name: "index_pug_relayer_set_dst_prices_on_dst_price_ratio"
@@ -333,6 +361,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.string "beacon_sponsor_wallet"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["beacon_airnode"], name: "index_pug_sub_api_add_beacons_on_beacon_airnode"
     t.index ["beacon_endpoint_id"], name: "index_pug_sub_api_add_beacons_on_beacon_endpoint_id"
     t.index ["beacon_id"], name: "index_pug_sub_api_add_beacons_on_beacon_id"
@@ -351,6 +381,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.string "ormp_data_root"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["ormp_data_count"], name: "index_pug_sub_api_aggregated_ormp_data_on_ormp_data_count"
     t.index ["ormp_data_root"], name: "index_pug_sub_api_aggregated_ormp_data_on_ormp_data_root"
     t.index ["pug_evm_contract_id"], name: "index_pug_sub_api_aggregated_ormp_data_on_pug_evm_contract_id"
@@ -367,6 +399,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.string "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["beacon_id"], name: "index_pug_sub_api_airnode_rrp_completeds_on_beacon_id"
     t.index ["data"], name: "index_pug_sub_api_airnode_rrp_completeds_on_data"
     t.index ["pug_evm_contract_id"], name: "idx_on_pug_evm_contract_id_7d68e35ef3"
@@ -383,6 +417,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.string "request_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["beacon_id"], name: "index_pug_sub_api_airnode_rrp_requesteds_on_beacon_id"
     t.index ["pug_evm_contract_id"], name: "idx_on_pug_evm_contract_id_7f90448c42"
     t.index ["pug_evm_log_id"], name: "index_pug_sub_api_airnode_rrp_requesteds_on_pug_evm_log_id"
@@ -398,6 +434,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.string "new_owner"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["new_owner"], name: "index_pug_sub_api_ownership_transfer_starteds_on_new_owner"
     t.index ["previous_owner"], name: "idx_on_previous_owner_093a3cf06e"
     t.index ["pug_evm_contract_id"], name: "idx_on_pug_evm_contract_id_07fc2e2c5b"
@@ -413,6 +451,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.string "new_owner"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["new_owner"], name: "index_pug_sub_api_ownership_transferreds_on_new_owner"
     t.index ["previous_owner"], name: "index_pug_sub_api_ownership_transferreds_on_previous_owner"
     t.index ["pug_evm_contract_id"], name: "idx_on_pug_evm_contract_id_53307178ad"
@@ -427,6 +467,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.string "beacon_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["beacon_id"], name: "index_pug_sub_api_remove_beacons_on_beacon_id"
     t.index ["pug_evm_contract_id"], name: "index_pug_sub_api_remove_beacons_on_pug_evm_contract_id"
     t.index ["pug_evm_log_id"], name: "index_pug_sub_api_remove_beacons_on_pug_evm_log_id"
@@ -442,6 +484,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_123431) do
     t.string "msg_root_root"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block_number"
+    t.datetime "timestamp"
     t.index ["beacon_id"], name: "index_pug_sub_api_sub_api_feed_updateds_on_beacon_id"
     t.index ["msg_root_count"], name: "index_pug_sub_api_sub_api_feed_updateds_on_msg_root_count"
     t.index ["msg_root_root"], name: "index_pug_sub_api_sub_api_feed_updateds_on_msg_root_root"
