@@ -56,6 +56,11 @@ class Message < ApplicationRecord
     "#{from_network.name.camelize}-#{to_network.name.camelize}"
   end
 
+  # join query example:
+  # message_of_root = Message.joins("INNER JOIN pug_sub_api_aggregated_ormp_data ON messages.root = pug_sub_api_aggregated_ormp_data.ormp_data_root")
+  #   .where("pug_sub_api_aggregated_ormp_data.pug_network_id = ?", to_network.id)
+  #   .order("pug_sub_api_aggregated_ormp_data.timestamp DESC")
+  #   .first
   def root_prepared?
     latest_aggregated = Pug::SubApiAggregatedOrmpDatum.where(pug_network: to_network).order(timestamp: :desc).first
     return false if latest_aggregated.nil?
