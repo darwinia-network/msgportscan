@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  root 'messages#index'
   get 'up' => 'rails/health#show', as: :rails_health_check
-  resources :messages, only: %i[index show]
+
+  root 'messages#index'
+  resources :messages, only: %i[index]
+  get 'messages/:from_network(/:to_network)' => 'messages#index', as: :network_messages
   get 'messages/:from_network/:to_network/:index' => 'messages#show', as: :network_message
 end

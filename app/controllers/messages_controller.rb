@@ -3,7 +3,13 @@ class MessagesController < ApplicationController
 
   # GET /messages or /messages.json
   def index
-    @messages = Message.order(block_timestamp: :desc)
+    from_network = Pug::Network.find_by(name: params[:from_network]) if params[:from_network].present?
+    to_network = Pug::Network.find_by(name: params[:to_network]) if params[:to_network].present?
+
+    @messages = Message.all
+    @messages = @messages.where(from_network:) if from_network.present?
+    @messages = @messages.where(to_network:) if to_network.present?
+    @messages = @messages.order(block_timestamp: :desc)
   end
 
   # GET /messages/1 or /messages/1.json
