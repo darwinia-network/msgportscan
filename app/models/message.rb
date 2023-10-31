@@ -53,7 +53,7 @@ class Message < ApplicationRecord
   end
 
   def direction
-    "#{from_network.name.camelize}-#{to_network.name.camelize}"
+    "#{from_network.name}->#{to_network.name}"
   end
 
   # join query example:
