@@ -22,10 +22,12 @@ class MessagesController < ApplicationController
     @message =
       if params[:id].present?
         Message.find(params[:id])
-      else
+      elsif params[:from_network] && params[:to_network] && params[:index]
         from_network = Pug::Network.find_by(name: params[:from_network])
         to_network = Pug::Network.find_by(name: params[:to_network])
         Message.find_by(from_network:, to_network:, index: params[:index])
+      elsif params[:tx_or_hash].present?
+        Message.find_by(transaction_hash: params[:tx_or_hash]) || Message.find_by(msg_hash: params[:tx_or_hash])
       end
 
     return unless @message.nil?

@@ -1,6 +1,7 @@
 namespace :messages do
   desc 'Start tracing messages'
   task trace: :environment do
+    $stdout.sync = true
     networks = Pug::Network.where(name: %w[crab arb_sep])
 
     loop do
