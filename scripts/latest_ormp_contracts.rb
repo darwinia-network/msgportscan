@@ -8,5 +8,8 @@ chain_ids.each do |chain_id|
   puts "   ORMP: #{latest['ORMP']}"
   puts " ORACLE: #{latest['ORACLE']}"
   puts "RELAYER: #{latest['RELAYER']}"
+
+  lastest_subapi = JSON.parse URI.open("https://raw.githubusercontent.com/subapidao/subapi/main/script/output/#{chain_id}/deploy.a-latest.json").read
+  puts " SUBAPI: #{lastest_subapi['SUBAPI']}"
   puts "\n"
 end

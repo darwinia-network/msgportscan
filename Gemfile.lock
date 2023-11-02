@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/wuminzhe/pug.git
-  revision: 51b08501e773fe6c0b59a424c2f48b1505b63c8f
+  revision: 101eee810f731d60118d25ea8069e70221093ece
   specs:
     pug (0.1.0)
       rails (>= 7.1.1)

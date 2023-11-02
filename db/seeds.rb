@@ -9,7 +9,7 @@
 #   end
 puts '== Start seeding'
 
-puts '=== Import Pug::Network records ==='
+puts '-- Import Pug::Network records'
 require 'open-uri'
 require 'json'
 
@@ -26,16 +26,16 @@ networks.each do |network|
     scan_span: 2000
   )
 end
-puts 'Imported.'
+puts "   Imported #{Pug::Network.count} networks."
 
-puts '=== Add Pug::EvmContract records ==='
+puts '-- Add Pug::EvmContract records'
 chain_ids = [421_614, 44]
 chain_ids.each do |chain_id|
-  puts "= Chain ID: #{chain_id}"
-  puts `rails 'pug:add_contract[#{chain_id},0x009D223Aad560e72282db9c0438Ef1ef2bf7703D]'`
-  puts `rails 'pug:add_contract[#{chain_id},0x00BD655DDfA7aFeF4BB109FE1F938724527B49D8]'`
-  puts `rails 'pug:add_contract[#{chain_id},0x003605167cd4C36063a7B63e604497e623Bb8B10]'`
-  puts `rails 'pug:add_contract[#{chain_id},0x00d917EC19A6b8837ADFcF8adE3D6faF62e0F587]'`
+  latest = JSON.parse URI.open("https://raw.githubusercontent.com/darwinia-network/ORMP/main/script/output/#{chain_id}/deploy.a-latest.json").read
+  lastest_subapi = JSON.parse URI.open("https://raw.githubusercontent.com/subapidao/subapi/main/script/output/#{chain_id}/deploy.a-latest.json").read
+  puts "   Chain ID: #{chain_id}"
+  puts `rails 'pug:add_contract[#{chain_id},#{latest['ORMP']}]'`
+  puts `rails 'pug:add_contract[#{chain_id},#{latest['ORACLE']}]'`
+  puts `rails 'pug:add_contract[#{chain_id},#{latest['RELAYER']}]'`
+  puts `rails 'pug:add_contract[#{chain_id},#{lastest_subapi['SUBAPI']}]'`
 end
-
-puts 'Added.'
