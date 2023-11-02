@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/wuminzhe/pug.git
-  revision: 76a91b7a5dd6c21984ba890442eca3b929989910
+  revision: 51b08501e773fe6c0b59a424c2f48b1505b63c8f
   specs:
     pug (0.1.0)
       rails (>= 7.1.1)
@@ -182,7 +182,7 @@ GEM
     public_suffix (5.0.3)
     puma (6.4.0)
       nio4r (~> 2.0)
-    racc (1.7.1)
+    racc (1.7.2)
     rack (3.0.8)
     rack-session (2.0.0)
       rack (>= 3.0.0)

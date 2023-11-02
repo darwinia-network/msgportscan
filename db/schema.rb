@@ -84,7 +84,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_075533) do
     t.string "display_name"
     t.string "rpc"
     t.string "explorer"
-    t.integer "scan_span", default: 5000
+    t.integer "scan_span", default: 2000
     t.integer "last_scanned_block", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
