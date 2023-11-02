@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_31_075533) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_02_062500) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -192,24 +192,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_075533) do
     t.index ["pug_network_id"], name: "index_pug_ormp_app_config_updateds_on_pug_network_id"
   end
 
-  create_table "pug_ormp_clear_failed_messages", force: :cascade do |t|
-    t.bigint "pug_evm_log_id", null: false
-    t.bigint "pug_evm_contract_id", null: false
-    t.bigint "pug_network_id", null: false
-    t.string "msg_hash"
-    t.datetime "timestamp"
-    t.integer "block_number"
-    t.integer "transaction_index"
-    t.integer "log_index"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["pug_evm_contract_id"], name: "index_pug_ormp_clear_failed_messages_on_pug_evm_contract_id"
-    t.index ["pug_evm_log_id"], name: "index_pug_ormp_clear_failed_messages_on_pug_evm_log_id"
-    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_cf1cf4bd32", unique: true
-    t.index ["pug_network_id", "msg_hash"], name: "idx_on_pug_network_id_msg_hash_4385c7ae0b"
-    t.index ["pug_network_id"], name: "index_pug_ormp_clear_failed_messages_on_pug_network_id"
-  end
-
   create_table "pug_ormp_message_accepteds", force: :cascade do |t|
     t.bigint "pug_evm_log_id", null: false
     t.bigint "pug_evm_contract_id", null: false
@@ -222,6 +204,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_075533) do
     t.string "message_from"
     t.decimal "message_to_chain_id", precision: 78
     t.string "message_to"
+    t.decimal "message_gas_limit", precision: 78
     t.string "message_encoded"
     t.datetime "timestamp"
     t.integer "block_number"
@@ -236,6 +219,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_075533) do
     t.index ["pug_network_id", "message_encoded"], name: "idx_on_pug_network_id_message_encoded_a8264b4473"
     t.index ["pug_network_id", "message_from"], name: "idx_on_pug_network_id_message_from_b377f3ea44"
     t.index ["pug_network_id", "message_from_chain_id"], name: "idx_on_pug_network_id_message_from_chain_id_4a514658c0"
+    t.index ["pug_network_id", "message_gas_limit"], name: "idx_on_pug_network_id_message_gas_limit_122237f108"
     t.index ["pug_network_id", "message_index"], name: "idx_on_pug_network_id_message_index_651bf9858b"
     t.index ["pug_network_id", "message_to"], name: "idx_on_pug_network_id_message_to_66672a857b"
     t.index ["pug_network_id", "message_to_chain_id"], name: "idx_on_pug_network_id_message_to_chain_id_04c24c674f"
@@ -262,26 +246,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_075533) do
     t.index ["pug_network_id", "dispatch_result"], name: "idx_on_pug_network_id_dispatch_result_3375b9f83f"
     t.index ["pug_network_id", "msg_hash"], name: "idx_on_pug_network_id_msg_hash_33a7665886"
     t.index ["pug_network_id"], name: "index_pug_ormp_message_dispatcheds_on_pug_network_id"
-  end
-
-  create_table "pug_ormp_retry_failed_messages", force: :cascade do |t|
-    t.bigint "pug_evm_log_id", null: false
-    t.bigint "pug_evm_contract_id", null: false
-    t.bigint "pug_network_id", null: false
-    t.string "msg_hash"
-    t.boolean "dispatch_result"
-    t.datetime "timestamp"
-    t.integer "block_number"
-    t.integer "transaction_index"
-    t.integer "log_index"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["pug_evm_contract_id"], name: "index_pug_ormp_retry_failed_messages_on_pug_evm_contract_id"
-    t.index ["pug_evm_log_id"], name: "index_pug_ormp_retry_failed_messages_on_pug_evm_log_id"
-    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_cd44786f9d", unique: true
-    t.index ["pug_network_id", "dispatch_result"], name: "idx_on_pug_network_id_dispatch_result_d4f198b26f"
-    t.index ["pug_network_id", "msg_hash"], name: "idx_on_pug_network_id_msg_hash_71e8fcc03b"
-    t.index ["pug_network_id"], name: "index_pug_ormp_retry_failed_messages_on_pug_network_id"
   end
 
   create_table "pug_ormp_set_default_configs", force: :cascade do |t|
@@ -575,18 +539,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_075533) do
   add_foreign_key "pug_ormp_app_config_updateds", "pug_evm_contracts"
   add_foreign_key "pug_ormp_app_config_updateds", "pug_evm_logs"
   add_foreign_key "pug_ormp_app_config_updateds", "pug_networks"
-  add_foreign_key "pug_ormp_clear_failed_messages", "pug_evm_contracts"
-  add_foreign_key "pug_ormp_clear_failed_messages", "pug_evm_logs"
-  add_foreign_key "pug_ormp_clear_failed_messages", "pug_networks"
   add_foreign_key "pug_ormp_message_accepteds", "pug_evm_contracts"
   add_foreign_key "pug_ormp_message_accepteds", "pug_evm_logs"
   add_foreign_key "pug_ormp_message_accepteds", "pug_networks"
   add_foreign_key "pug_ormp_message_dispatcheds", "pug_evm_contracts"
   add_foreign_key "pug_ormp_message_dispatcheds", "pug_evm_logs"
   add_foreign_key "pug_ormp_message_dispatcheds", "pug_networks"
-  add_foreign_key "pug_ormp_retry_failed_messages", "pug_evm_contracts"
-  add_foreign_key "pug_ormp_retry_failed_messages", "pug_evm_logs"
-  add_foreign_key "pug_ormp_retry_failed_messages", "pug_networks"
   add_foreign_key "pug_ormp_set_default_configs", "pug_evm_contracts"
   add_foreign_key "pug_ormp_set_default_configs", "pug_evm_logs"
   add_foreign_key "pug_ormp_set_default_configs", "pug_networks"

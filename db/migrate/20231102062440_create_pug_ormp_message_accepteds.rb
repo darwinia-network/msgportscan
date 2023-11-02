@@ -12,6 +12,7 @@ class CreatePugOrmpMessageAccepteds < ActiveRecord::Migration[7.1]
       t.string :message_from
       t.decimal :message_to_chain_id, precision: 78, scale: 0
       t.string :message_to
+      t.decimal :message_gas_limit, precision: 78, scale: 0
       t.string :message_encoded
       t.datetime :timestamp
       t.integer :block_number
@@ -28,6 +29,7 @@ class CreatePugOrmpMessageAccepteds < ActiveRecord::Migration[7.1]
     add_index :pug_ormp_message_accepteds, [:pug_network_id, :message_from]
     add_index :pug_ormp_message_accepteds, [:pug_network_id, :message_to_chain_id]
     add_index :pug_ormp_message_accepteds, [:pug_network_id, :message_to]
+    add_index :pug_ormp_message_accepteds, [:pug_network_id, :message_gas_limit]
     add_index :pug_ormp_message_accepteds, [:pug_network_id, :message_encoded]
     add_index :pug_ormp_message_accepteds, %i[pug_network_id block_number transaction_index log_index], unique: true
   end
