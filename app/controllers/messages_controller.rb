@@ -9,6 +9,7 @@ class MessagesController < ApplicationController
     @messages = Message.includes(%i[from_network to_network])
     @messages = @messages.where(from_network:) if from_network.present?
     @messages = @messages.where(to_network:) if to_network.present?
+    @messages = @messages.where(status: params[:status]) if params[:status].present?
     @messages = @messages.order(block_timestamp: :desc)
   end
 

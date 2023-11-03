@@ -2,7 +2,7 @@
 
 ```bash
 # LIST
-/messages # all 
+/messages?status=accepted # all, status is an optional filter, same for all other lists
 /messages/crab # all from crab
 /messages/_/crab # all to crab
 /messages/arb_sep/crab # all from arb_sep to crab

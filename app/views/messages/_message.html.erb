@@ -12,7 +12,7 @@
     <td class="whitespace-nowrap px-6 py-2"><%= address_link_short(message.to_network, message.to) %></td>
     <td class="whitespace-nowrap px-6 py-2">
       <div class="<%= status_style(message.status) %>">
-        <%= message.status_label %>
+        <%= link_to message.status_label, "#{request.path}?status=#{message.status}" %>
       </div>
     </td>
     <td class="whitespace-nowrap px-6 py-2">
