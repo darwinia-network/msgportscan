@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_06_062425) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_06_091831) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -217,6 +217,86 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_06_062425) do
     t.index ["pug_network_id", "relayer"], name: "idx_on_pug_network_id_relayer_69c0165f01"
     t.index ["pug_network_id", "ua"], name: "index_pug_ormp_app_config_updateds_on_pug_network_id_and_ua"
     t.index ["pug_network_id"], name: "index_pug_ormp_app_config_updateds_on_pug_network_id"
+  end
+
+  create_table "pug_ormp_line_ownership_transfer_starteds", force: :cascade do |t|
+    t.bigint "pug_evm_log_id", null: false
+    t.bigint "pug_evm_contract_id", null: false
+    t.bigint "pug_network_id", null: false
+    t.string "previous_owner"
+    t.string "new_owner"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pug_evm_contract_id"], name: "idx_on_pug_evm_contract_id_632d6e7e4e"
+    t.index ["pug_evm_log_id"], name: "idx_on_pug_evm_log_id_46acf9bf78"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_cbf2c2e185", unique: true
+    t.index ["pug_network_id", "new_owner"], name: "idx_on_pug_network_id_new_owner_6921d2f6c4"
+    t.index ["pug_network_id", "previous_owner"], name: "idx_on_pug_network_id_previous_owner_6d2e5c6eeb"
+    t.index ["pug_network_id"], name: "idx_on_pug_network_id_c96381d483"
+  end
+
+  create_table "pug_ormp_line_ownership_transferreds", force: :cascade do |t|
+    t.bigint "pug_evm_log_id", null: false
+    t.bigint "pug_evm_contract_id", null: false
+    t.bigint "pug_network_id", null: false
+    t.string "previous_owner"
+    t.string "new_owner"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pug_evm_contract_id"], name: "idx_on_pug_evm_contract_id_b2572984bf"
+    t.index ["pug_evm_log_id"], name: "index_pug_ormp_line_ownership_transferreds_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_8427aa6b57", unique: true
+    t.index ["pug_network_id", "new_owner"], name: "idx_on_pug_network_id_new_owner_2100b99ead"
+    t.index ["pug_network_id", "previous_owner"], name: "idx_on_pug_network_id_previous_owner_4f66a7798c"
+    t.index ["pug_network_id"], name: "index_pug_ormp_line_ownership_transferreds_on_pug_network_id"
+  end
+
+  create_table "pug_ormp_line_set_from_lines", force: :cascade do |t|
+    t.bigint "pug_evm_log_id", null: false
+    t.bigint "pug_evm_contract_id", null: false
+    t.bigint "pug_network_id", null: false
+    t.decimal "from_chain_id", precision: 78
+    t.string "from_line"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pug_evm_contract_id"], name: "index_pug_ormp_line_set_from_lines_on_pug_evm_contract_id"
+    t.index ["pug_evm_log_id"], name: "index_pug_ormp_line_set_from_lines_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_3399c3ef58", unique: true
+    t.index ["pug_network_id", "from_chain_id"], name: "idx_on_pug_network_id_from_chain_id_c08ae9e1d5"
+    t.index ["pug_network_id", "from_line"], name: "idx_on_pug_network_id_from_line_2bea6aa083"
+    t.index ["pug_network_id"], name: "index_pug_ormp_line_set_from_lines_on_pug_network_id"
+  end
+
+  create_table "pug_ormp_line_set_to_lines", force: :cascade do |t|
+    t.bigint "pug_evm_log_id", null: false
+    t.bigint "pug_evm_contract_id", null: false
+    t.bigint "pug_network_id", null: false
+    t.decimal "to_chain_id", precision: 78
+    t.string "to_line"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pug_evm_contract_id"], name: "index_pug_ormp_line_set_to_lines_on_pug_evm_contract_id"
+    t.index ["pug_evm_log_id"], name: "index_pug_ormp_line_set_to_lines_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_387e3045ba", unique: true
+    t.index ["pug_network_id", "to_chain_id"], name: "idx_on_pug_network_id_to_chain_id_2300affedf"
+    t.index ["pug_network_id", "to_line"], name: "index_pug_ormp_line_set_to_lines_on_pug_network_id_and_to_line"
+    t.index ["pug_network_id"], name: "index_pug_ormp_line_set_to_lines_on_pug_network_id"
   end
 
   create_table "pug_ormp_message_accepteds", force: :cascade do |t|
@@ -566,6 +646,18 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_06_062425) do
   add_foreign_key "pug_ormp_app_config_updateds", "pug_evm_contracts"
   add_foreign_key "pug_ormp_app_config_updateds", "pug_evm_logs"
   add_foreign_key "pug_ormp_app_config_updateds", "pug_networks"
+  add_foreign_key "pug_ormp_line_ownership_transfer_starteds", "pug_evm_contracts"
+  add_foreign_key "pug_ormp_line_ownership_transfer_starteds", "pug_evm_logs"
+  add_foreign_key "pug_ormp_line_ownership_transfer_starteds", "pug_networks"
+  add_foreign_key "pug_ormp_line_ownership_transferreds", "pug_evm_contracts"
+  add_foreign_key "pug_ormp_line_ownership_transferreds", "pug_evm_logs"
+  add_foreign_key "pug_ormp_line_ownership_transferreds", "pug_networks"
+  add_foreign_key "pug_ormp_line_set_from_lines", "pug_evm_contracts"
+  add_foreign_key "pug_ormp_line_set_from_lines", "pug_evm_logs"
+  add_foreign_key "pug_ormp_line_set_from_lines", "pug_networks"
+  add_foreign_key "pug_ormp_line_set_to_lines", "pug_evm_contracts"
+  add_foreign_key "pug_ormp_line_set_to_lines", "pug_evm_logs"
+  add_foreign_key "pug_ormp_line_set_to_lines", "pug_networks"
   add_foreign_key "pug_ormp_message_accepteds", "pug_evm_contracts"
   add_foreign_key "pug_ormp_message_accepteds", "pug_evm_logs"
   add_foreign_key "pug_ormp_message_accepteds", "pug_networks"

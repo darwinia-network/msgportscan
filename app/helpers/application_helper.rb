@@ -8,13 +8,17 @@ module ApplicationHelper
   end
 
   def address_link(network, address)
+    contract = Pug::EvmContract.find_by(address:)
+    display = address + (contract.nil? ? '' : "(#{contract.name})")
     url = File.join(network.explorer, 'address', address)
-    %(<a href="#{url}" class="underline">#{address}</a>).html_safe
+    %(<a href="#{url}" class="underline">#{display}</a>).html_safe
   end
 
   def address_link_short(network, address)
+    contract = Pug::EvmContract.find_by(address:)
+    display = short(address).to_s + (contract.nil? ? '' : "(#{contract.name})")
     url = File.join(network.explorer, 'address', address)
-    %(<a href="#{url}" class="underline">#{short(address)}</a>).html_safe
+    %(<a href="#{url}" class="underline">#{display}</a>).html_safe
   end
 
   def transaction_link(network, tx_hash)

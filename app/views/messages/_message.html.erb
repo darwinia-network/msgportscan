@@ -8,8 +8,8 @@
     <td class="whitespace-nowrap px-6 py-2"><%= block_link(message.from_network, message.block_number) %></td>
     <td class="whitespace-nowrap px-6 py-2"><%= link_to short(message.msg_hash), message_by_tx_or_hash_path(message.msg_hash), class: 'underline' %></td>
     <td class="whitespace-nowrap px-6 py-2"><%= short(message.root) %></td>
-    <td class="whitespace-nowrap px-6 py-2"><%= address_link_short(message.from_network, message.from) %></td>
-    <td class="whitespace-nowrap px-6 py-2"><%= address_link_short(message.to_network, message.to) %></td>
+    <td class="whitespace-nowrap px-6 py-2 text-left"><%= address_link_short(message.from_network, message.from) %></td>
+    <td class="whitespace-nowrap px-6 py-2 text-left"><%= address_link_short(message.to_network, message.to) %></td>
     <td class="whitespace-nowrap px-6 py-2">
       <div class="<%= status_style(message.status) %>">
         <%= link_to message.status_label, "#{request.path}?status=#{message.status}" %>

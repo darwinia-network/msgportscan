@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/wuminzhe/pug.git
-  revision: 47444904b2ce71aecd59dc4f277e5c00b6e4701f
+  revision: c5255111eecb61e9f67aebe257ae3f56f5c0abbe
   specs:
     pug (0.1.0)
       rails (>= 7.1.1)
@@ -225,7 +225,7 @@ GEM
       mini_portile2 (~> 2.8)
       pkg-config (~> 1.5)
       rubyzip (~> 2.3)
-    rdoc (6.5.0)
+    rdoc (6.6.0)
       psych (>= 4.0.0)
     regexp_parser (2.8.2)
     reline (0.3.9)
