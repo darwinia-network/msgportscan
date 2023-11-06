@@ -71,5 +71,5 @@ end
 
 gem 'annotate', '~> 3.2'
 gem 'eth', github: 'wuminzhe/eth.rb'
-gem 'pug', github: 'wuminzhe/pug'
-# gem 'pug', path: '/workspaces/pug'
+# gem 'pug', github: 'wuminzhe/pug'
+gem 'pug', path: '/workspaces/pug'

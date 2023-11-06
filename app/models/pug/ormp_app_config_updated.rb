@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: pug_ormp_app_config_updateds
+#
+#  id                  :bigint           not null, primary key
+#  pug_evm_log_id      :bigint           not null
+#  pug_evm_contract_id :bigint           not null
+#  pug_network_id      :bigint           not null
+#  ua                  :string
+#  oracle              :string
+#  relayer             :string
+#  timestamp           :datetime
+#  block_number        :integer
+#  transaction_index   :integer
+#  log_index           :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#
 class Pug::OrmpAppConfigUpdated < ApplicationRecord
   belongs_to :pug_evm_log, class_name: 'Pug::EvmLog'
   alias evm_log pug_evm_log

@@ -10,9 +10,8 @@ GIT
       rbsecp256k1 (~> 6.0)
       scrypt (~> 3.0)
 
-GIT
-  remote: https://github.com/wuminzhe/pug.git
-  revision: 101eee810f731d60118d25ea8069e70221093ece
+PATH
+  remote: /workspaces/pug
   specs:
     pug (0.1.0)
       rails (>= 7.1.1)
@@ -160,7 +159,7 @@ GEM
     minitest (5.20.0)
     msgpack (1.7.2)
     mutex_m (0.1.2)
-    net-imap (0.4.3)
+    net-imap (0.4.4)
       date
       net-protocol
     net-pop (0.1.2)
@@ -182,7 +181,7 @@ GEM
     public_suffix (5.0.3)
     puma (6.4.0)
       nio4r (~> 2.0)
-    racc (1.7.2)
+    racc (1.7.3)
     rack (3.0.8)
     rack-session (2.0.0)
       rack (>= 3.0.0)

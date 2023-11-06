@@ -1,3 +1,28 @@
+# == Schema Information
+#
+# Table name: pug_ormp_message_accepteds
+#
+#  id                    :bigint           not null, primary key
+#  pug_evm_log_id        :bigint           not null
+#  pug_evm_contract_id   :bigint           not null
+#  pug_network_id        :bigint           not null
+#  msg_hash              :string
+#  root                  :string
+#  message_channel       :string
+#  message_index         :decimal(78, )
+#  message_from_chain_id :decimal(78, )
+#  message_from          :string
+#  message_to_chain_id   :decimal(78, )
+#  message_to            :string
+#  message_gas_limit     :decimal(78, )
+#  message_encoded       :string
+#  timestamp             :datetime
+#  block_number          :integer
+#  transaction_index     :integer
+#  log_index             :integer
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#
 class Pug::OrmpMessageAccepted < ApplicationRecord
   belongs_to :pug_evm_log, class_name: 'Pug::EvmLog'
   alias evm_log pug_evm_log
