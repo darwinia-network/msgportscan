@@ -73,7 +73,7 @@ def check_failed_messages(networks)
   end
 end
 
-# root_ready -> success/failed
+# root_ready -> dispatch_success/dispatch_failed
 def check_root_ready_messages(networks)
   messages = Message.where(from_network: networks, to_network: networks, status: :root_ready)
   messages.each do |message|
@@ -88,6 +88,8 @@ def check_root_ready_messages(networks)
                      else
                        Message.statuses[:dispatch_failed]
                      end
+    # update proof
+    message.proof = dispatch_event.evm_log.evm_transaction.input[(-32 * 64)..].scan(/.{64}/).map { |item| "0x#{item}" }
     message.save!
   end
 end

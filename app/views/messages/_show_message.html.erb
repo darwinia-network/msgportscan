@@ -26,6 +26,12 @@
             <dt class="text-sm font-medium leading-6 text-gray-900">Message Root</dt>
             <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= message.root %></dd>
           </div>
+          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm font-medium leading-6 text-gray-900">Proof</dt>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              <pre style="font-family: 'Overpass Mono', monospace"><%= message.proof.nil? ? '' : JSON.pretty_generate(message.proof) %></pre>
+            </dd>
+          </div>
 
           <!-- SOURCE CHAIN -->
           <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
