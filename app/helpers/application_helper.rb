@@ -36,13 +36,13 @@ module ApplicationHelper
 
     contract = Pug::EvmContract.find_by(address: message.from)
     if contract
-      transaction = Pug::EvmTransaction.find_by(transaction_hash: message.transaction_hash)
-      enduser_address = transaction.from
-      ea_url = File.join(network.explorer, 'address', enduser_address)
-      ua_url = File.join(network.explorer, 'address', message.from)
+      source_ea = message.msgport_from
+      source_ua = message.from
+      ea_url = File.join(network.explorer, 'address', source_ea)
+      ua_url = File.join(network.explorer, 'address', source_ua)
       %(
-        <a href="#{ea_url}" class="underline text-xs">#{enduser_address}</a></br>
-        └╴<a href="#{ua_url}" class="underline">#{"#{message.from}(#{contract.name})"}</a>
+        <a href="#{ea_url}" class="underline text-xs">#{source_ea}</a></br>
+        └╴<a href="#{ua_url}" class="underline">#{"#{source_ua}(#{contract.name})"}</a>
       ).html_safe
     else
       display = message.from
@@ -55,26 +55,10 @@ module ApplicationHelper
     network = message.to_network
 
     contract = Pug::EvmContract.find_by(address: message.to)
-    if contract && contract.name.end_with?('Line')
+    if message.msgport_to.present?
 
-      # https://github.com/darwinia-network/darwinia-msgport/blob/6f751cf02f2ea0fbb2de401cd3cf07cca68e1b49/src/lines/ORMPLine.sol#L64
-      # recv(address,address,bytes)
-      # 0x394d1bca
-      #   0000000000000000000000009f33a4809aa708d7a399fedba514e0a0d15efa85 <- `source EA` address
-      #   000000000000000000000000422df988fda9c7bac5750ee9ea6a46d7a024e99e <- `target EA` address
-      #   0000000000000000000000000000000000000000000000000000000000000060
-      #   0000000000000000000000000000000000000000000000000000000000000064
-      #   d8e6817200000000000000000000000000000000000000000000000000000000 <- the message sent to `target EA`
-      #   0000002000000000000000000000000000000000000000000000000000000000
-      #   0000000212340000000000000000000000000000000000000000000000000000
-      #   0000000000000000000000000000000000000000000000000000000000000000
-      #   0e3bede4f813af49d539dba8bf19f49386acd6670a5ffea93814d7a5ce5291c2
-      #   000000000000000000000000000000000000000000000000000000000000002c
-      #   001ddfd752a071964fe15c2386ec1811963d00c2
-
-      # target_ua -> target_ea
       target_ua = message.to
-      target_ea = '0x' + message.encoded[98..137]
+      target_ea = message.msgport_to
       ua_url = File.join(network.explorer, 'address', target_ua)
       ea_url = File.join(network.explorer, 'address', target_ea)
       %(

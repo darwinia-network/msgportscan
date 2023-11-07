@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_06_091831) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_07_025835) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -37,6 +37,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_06_091831) do
     t.integer "clear_block_number"
     t.integer "clear_block_timestamp"
     t.json "proof"
+    t.text "msgport_payload"
+    t.string "msgport_from"
+    t.string "msgport_to"
     t.index ["msg_hash"], name: "index_messages_on_msg_hash", unique: true
     t.index ["root"], name: "index_messages_on_root", unique: true
   end
