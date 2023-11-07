@@ -7,15 +7,7 @@ module ApplicationHelper
     "#{hex[0..6]}..#{hex[-5..]}"
   end
 
-  def address_link(network, address)
-    contract = Pug::EvmContract.find_by(address:)
-    display = address + (contract.nil? ? '' : "(#{contract.name})")
-    url = File.join(network.explorer, 'address', address)
-    %(<a href="#{url}" class="underline">#{display}</a>).html_safe
-  end
-
-  def address_link_short(network, address)
-    contract = Pug::EvmContract.find_by(address:)
+  def address_link_short(network, address, contract)
     display = contract&.name || short(address)
     url = File.join(network.explorer, 'address', address)
     %(<a href="#{url}" class="underline">#{display}</a>).html_safe

@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
     from_network = Pug::Network.find_by(name: params[:from_network]) if params[:from_network].present?
     to_network = Pug::Network.find_by(name: params[:to_network]) if params[:to_network].present?
 
-    @messages = Message.includes(%i[from_network to_network])
+    @messages = Message.includes(:from_network, :to_network, :from_contract, :to_contract)
     @messages = @messages.where(from_network:) if from_network.present?
     @messages = @messages.where(to_network:) if to_network.present?
     @messages = @messages.where(status: params[:status]) if params[:status].present?

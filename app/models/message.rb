@@ -29,6 +29,8 @@
 class Message < ApplicationRecord
   belongs_to :from_network, class_name: 'Pug::Network', foreign_key: 'from_network_id'
   belongs_to :to_network, class_name: 'Pug::Network', foreign_key: 'to_network_id'
+  belongs_to :from_contract, class_name: 'Pug::EvmContract', foreign_key: 'from', primary_key: 'address', optional: true
+  belongs_to :to_contract, class_name: 'Pug::EvmContract', foreign_key: 'to', primary_key: 'address', optional: true
 
   # dispatch will have 2 status: dispatched and success, dispatched but failed
   enum status: { accepted: 0, root_ready: 1, dispatch_success: 2, dispatch_failed: 3, cleared: 4 }
