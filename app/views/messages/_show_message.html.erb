@@ -26,7 +26,8 @@
                   <%= message.encoded %>
                 <% else %>
                   <% mp = message.msgport_payload[2..] %>
-                  <%= message.encoded.split(mp).first %><span class="underline decoration-dotted"><%= mp %></span>
+                  <%= message.encoded.split(mp).first %><span class="underline decoration-dotted relative"><%= mp %><div class="absolute top-3 left-0 text-xs">msgport</div></span>
+                  
                 <% end %>
               </div>
             </dd>
