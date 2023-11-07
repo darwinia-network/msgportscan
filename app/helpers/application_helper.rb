@@ -55,7 +55,7 @@ module ApplicationHelper
     network = message.to_network
 
     contract = Pug::EvmContract.find_by(address: message.to)
-    if message.msgport_to.present?
+    if contract && message.msgport_to.present?
 
       target_ua = message.to
       target_ea = message.msgport_to
