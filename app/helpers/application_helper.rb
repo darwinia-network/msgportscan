@@ -42,7 +42,7 @@ module ApplicationHelper
       ua_url = File.join(network.explorer, 'address', source_ua)
       %(
         <a href="#{ea_url}" class="underline text-xs">#{source_ea}</a></br>
-        └╴<a href="#{ua_url}" class="underline">#{"#{source_ua}(#{contract.name})"}</a>
+        ╰╴<a href="#{ua_url}" class="underline">#{"#{source_ua}(#{contract.name})"}</a>
       ).html_safe
     else
       display = message.from
@@ -63,7 +63,7 @@ module ApplicationHelper
       ea_url = File.join(network.explorer, 'address', target_ea)
       %(
         <a href="#{ua_url}" class="underline">#{target_ua}(#{contract.name})</a></br>
-        └╴<a href="#{ea_url}" class="underline text-xs">#{target_ea}</a>
+        ╰╴<a href="#{ea_url}" class="underline text-xs">#{target_ea}</a>
       ).html_safe
     else
       display = message.to
