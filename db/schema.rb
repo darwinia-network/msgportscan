@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_07_025835) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_08_053635) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -222,6 +222,26 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_07_025835) do
     t.index ["pug_network_id"], name: "index_pug_ormp_app_config_updateds_on_pug_network_id"
   end
 
+  create_table "pug_ormp_default_config_updateds", force: :cascade do |t|
+    t.bigint "pug_evm_log_id", null: false
+    t.bigint "pug_evm_contract_id", null: false
+    t.bigint "pug_network_id", null: false
+    t.string "oracle"
+    t.string "relayer"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pug_evm_contract_id"], name: "index_pug_ormp_default_config_updateds_on_pug_evm_contract_id"
+    t.index ["pug_evm_log_id"], name: "index_pug_ormp_default_config_updateds_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_cb012d1d77", unique: true
+    t.index ["pug_network_id", "oracle"], name: "idx_on_pug_network_id_oracle_d114fa4080"
+    t.index ["pug_network_id", "relayer"], name: "idx_on_pug_network_id_relayer_3cab1ae00e"
+    t.index ["pug_network_id"], name: "index_pug_ormp_default_config_updateds_on_pug_network_id"
+  end
+
   create_table "pug_ormp_line_ownership_transfer_starteds", force: :cascade do |t|
     t.bigint "pug_evm_log_id", null: false
     t.bigint "pug_evm_contract_id", null: false
@@ -302,6 +322,24 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_07_025835) do
     t.index ["pug_network_id"], name: "index_pug_ormp_line_set_to_lines_on_pug_network_id"
   end
 
+  create_table "pug_ormp_line_uris", force: :cascade do |t|
+    t.bigint "pug_evm_log_id", null: false
+    t.bigint "pug_evm_contract_id", null: false
+    t.bigint "pug_network_id", null: false
+    t.string "uri"
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pug_evm_contract_id"], name: "index_pug_ormp_line_uris_on_pug_evm_contract_id"
+    t.index ["pug_evm_log_id"], name: "index_pug_ormp_line_uris_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_ac2769517f", unique: true
+    t.index ["pug_network_id", "uri"], name: "index_pug_ormp_line_uris_on_pug_network_id_and_uri"
+    t.index ["pug_network_id"], name: "index_pug_ormp_line_uris_on_pug_network_id"
+  end
+
   create_table "pug_ormp_message_accepteds", force: :cascade do |t|
     t.bigint "pug_evm_log_id", null: false
     t.bigint "pug_evm_contract_id", null: false
@@ -356,26 +394,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_07_025835) do
     t.index ["pug_network_id", "dispatch_result"], name: "idx_on_pug_network_id_dispatch_result_3375b9f83f"
     t.index ["pug_network_id", "msg_hash"], name: "idx_on_pug_network_id_msg_hash_33a7665886"
     t.index ["pug_network_id"], name: "index_pug_ormp_message_dispatcheds_on_pug_network_id"
-  end
-
-  create_table "pug_ormp_set_default_configs", force: :cascade do |t|
-    t.bigint "pug_evm_log_id", null: false
-    t.bigint "pug_evm_contract_id", null: false
-    t.bigint "pug_network_id", null: false
-    t.string "oracle"
-    t.string "relayer"
-    t.datetime "timestamp"
-    t.integer "block_number"
-    t.integer "transaction_index"
-    t.integer "log_index"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["pug_evm_contract_id"], name: "index_pug_ormp_set_default_configs_on_pug_evm_contract_id"
-    t.index ["pug_evm_log_id"], name: "index_pug_ormp_set_default_configs_on_pug_evm_log_id"
-    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_f36d2aa15c", unique: true
-    t.index ["pug_network_id", "oracle"], name: "idx_on_pug_network_id_oracle_90a88e2d35"
-    t.index ["pug_network_id", "relayer"], name: "idx_on_pug_network_id_relayer_7ed99b847d"
-    t.index ["pug_network_id"], name: "index_pug_ormp_set_default_configs_on_pug_network_id"
   end
 
   create_table "pug_relayer_assigneds", force: :cascade do |t|
@@ -612,6 +630,24 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_07_025835) do
     t.index ["pug_network_id"], name: "index_pug_sub_api_remove_beacons_on_pug_network_id"
   end
 
+  create_table "pug_sub_api_set_fees", force: :cascade do |t|
+    t.bigint "pug_evm_log_id", null: false
+    t.bigint "pug_evm_contract_id", null: false
+    t.bigint "pug_network_id", null: false
+    t.decimal "fee", precision: 78
+    t.datetime "timestamp"
+    t.integer "block_number"
+    t.integer "transaction_index"
+    t.integer "log_index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pug_evm_contract_id"], name: "index_pug_sub_api_set_fees_on_pug_evm_contract_id"
+    t.index ["pug_evm_log_id"], name: "index_pug_sub_api_set_fees_on_pug_evm_log_id"
+    t.index ["pug_network_id", "block_number", "transaction_index", "log_index"], name: "idx_on_pug_network_id_block_number_transaction_inde_9f4b35515b", unique: true
+    t.index ["pug_network_id", "fee"], name: "index_pug_sub_api_set_fees_on_pug_network_id_and_fee"
+    t.index ["pug_network_id"], name: "index_pug_sub_api_set_fees_on_pug_network_id"
+  end
+
   create_table "pug_sub_api_sub_api_feed_updateds", force: :cascade do |t|
     t.bigint "pug_evm_log_id", null: false
     t.bigint "pug_evm_contract_id", null: false
@@ -649,6 +685,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_07_025835) do
   add_foreign_key "pug_ormp_app_config_updateds", "pug_evm_contracts"
   add_foreign_key "pug_ormp_app_config_updateds", "pug_evm_logs"
   add_foreign_key "pug_ormp_app_config_updateds", "pug_networks"
+  add_foreign_key "pug_ormp_default_config_updateds", "pug_evm_contracts"
+  add_foreign_key "pug_ormp_default_config_updateds", "pug_evm_logs"
+  add_foreign_key "pug_ormp_default_config_updateds", "pug_networks"
   add_foreign_key "pug_ormp_line_ownership_transfer_starteds", "pug_evm_contracts"
   add_foreign_key "pug_ormp_line_ownership_transfer_starteds", "pug_evm_logs"
   add_foreign_key "pug_ormp_line_ownership_transfer_starteds", "pug_networks"
@@ -661,15 +700,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_07_025835) do
   add_foreign_key "pug_ormp_line_set_to_lines", "pug_evm_contracts"
   add_foreign_key "pug_ormp_line_set_to_lines", "pug_evm_logs"
   add_foreign_key "pug_ormp_line_set_to_lines", "pug_networks"
+  add_foreign_key "pug_ormp_line_uris", "pug_evm_contracts"
+  add_foreign_key "pug_ormp_line_uris", "pug_evm_logs"
+  add_foreign_key "pug_ormp_line_uris", "pug_networks"
   add_foreign_key "pug_ormp_message_accepteds", "pug_evm_contracts"
   add_foreign_key "pug_ormp_message_accepteds", "pug_evm_logs"
   add_foreign_key "pug_ormp_message_accepteds", "pug_networks"
   add_foreign_key "pug_ormp_message_dispatcheds", "pug_evm_contracts"
   add_foreign_key "pug_ormp_message_dispatcheds", "pug_evm_logs"
   add_foreign_key "pug_ormp_message_dispatcheds", "pug_networks"
-  add_foreign_key "pug_ormp_set_default_configs", "pug_evm_contracts"
-  add_foreign_key "pug_ormp_set_default_configs", "pug_evm_logs"
-  add_foreign_key "pug_ormp_set_default_configs", "pug_networks"
   add_foreign_key "pug_relayer_assigneds", "pug_evm_contracts"
   add_foreign_key "pug_relayer_assigneds", "pug_evm_logs"
   add_foreign_key "pug_relayer_assigneds", "pug_networks"
@@ -703,6 +742,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_07_025835) do
   add_foreign_key "pug_sub_api_remove_beacons", "pug_evm_contracts"
   add_foreign_key "pug_sub_api_remove_beacons", "pug_evm_logs"
   add_foreign_key "pug_sub_api_remove_beacons", "pug_networks"
+  add_foreign_key "pug_sub_api_set_fees", "pug_evm_contracts"
+  add_foreign_key "pug_sub_api_set_fees", "pug_evm_logs"
+  add_foreign_key "pug_sub_api_set_fees", "pug_networks"
   add_foreign_key "pug_sub_api_sub_api_feed_updateds", "pug_evm_contracts"
   add_foreign_key "pug_sub_api_sub_api_feed_updateds", "pug_evm_logs"
   add_foreign_key "pug_sub_api_sub_api_feed_updateds", "pug_networks"

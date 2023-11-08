@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: pug_ormp_set_default_configs
+# Table name: pug_ormp_default_config_updateds
 #
 #  id                  :bigint           not null, primary key
 #  pug_evm_log_id      :bigint           not null
@@ -15,7 +15,7 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #
-class Pug::OrmpSetDefaultConfig < ApplicationRecord
+class Pug::OrmpDefaultConfigUpdated < ApplicationRecord
   belongs_to :pug_evm_log, class_name: 'Pug::EvmLog'
   alias evm_log pug_evm_log
   belongs_to :pug_evm_contract, class_name: 'Pug::EvmContract'

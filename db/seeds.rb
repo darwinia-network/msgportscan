@@ -33,9 +33,11 @@ chain_ids = [421_614, 44]
 chain_ids.each_with_index do |chain_id, i|
   latest = JSON.parse URI.open("https://raw.githubusercontent.com/darwinia-network/ORMP/main/script/output/#{chain_id}/deploy.a-latest.json").read
   lastest_subapi = JSON.parse URI.open("https://raw.githubusercontent.com/subapidao/subapi/main/script/output/#{chain_id}/deploy.a-latest.json").read
+  lastest_ormp_line = JSON.parse URI.open("https://raw.githubusercontent.com/darwinia-network/darwinia-msgport/main/script/output/#{chain_id}/deploy_ormp_line.a-latest.json").read
   puts "#{i}. Chain ID: #{chain_id}"
   puts `rails 'pug:add_contract[#{chain_id},#{latest['ORMP']}]'`
   puts `rails 'pug:add_contract[#{chain_id},#{latest['ORACLE']}]'`
   puts `rails 'pug:add_contract[#{chain_id},#{latest['RELAYER']}]'`
   puts `rails 'pug:add_contract[#{chain_id},#{lastest_subapi['SUBAPI']}]'`
+  puts `rails 'pug:add_contract[#{chain_id},#{lastest_ormp_line['ORMP_LINE']}]'`
 end
