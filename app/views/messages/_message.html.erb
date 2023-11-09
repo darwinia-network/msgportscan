@@ -4,7 +4,7 @@
       <%= link_to message.from_network.name, network_messages_path(message.from_network.name), class: 'underline'  %>
       ->
       <%= link_to message.to_network.name, network_messages_path('_', message.to_network.name), class: 'underline'  %>
-    <td class="whitespace-nowrap px-6 py-2"><%= link_to message.index, network_message_path(message.from_network.name, message.to_network.name, message.index), class: "underline" %></td>
+    <td class="whitespace-nowrap px-6 py-2"><%= message.index %></td>
     <td class="whitespace-nowrap px-6 py-2"><%= block_link(message.from_network, message.block_number) %></td>
     <td class="whitespace-nowrap px-6 py-2"><%= link_to short(message.msg_hash), message_by_tx_or_hash_path(message.msg_hash), class: 'underline' %></td>
     <td class="whitespace-nowrap px-6 py-2"><%= short(message.root) %></td>
@@ -20,5 +20,5 @@
         <%= time_consumption(message) %>
       <% end %>
     </td>
-    <td class="whitespace-nowrap px-6 py-2"><%= link_to "Detail", network_message_path(message.from_network.name, message.to_network.name, message.index), class: "underline" %></td>
+    <td class="whitespace-nowrap px-6 py-2"><%= link_to "Detail", message_by_tx_or_hash_path(message.msg_hash), class: "underline" %></td>
   </tr>
