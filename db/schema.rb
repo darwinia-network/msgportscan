@@ -36,6 +36,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_09_150448) do
     t.string "clear_transaction_hash"
     t.integer "clear_block_number"
     t.integer "clear_block_timestamp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.json "proof"
     t.text "msgport_payload"
     t.string "msgport_from"

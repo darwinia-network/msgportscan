@@ -24,6 +24,8 @@
 #  clear_transaction_hash    :string
 #  clear_block_number        :integer
 #  clear_block_timestamp     :integer
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
 #  proof                     :json
 #  msgport_payload           :text
 #  msgport_from              :string

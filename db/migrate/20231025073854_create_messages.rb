@@ -22,6 +22,8 @@ class CreateMessages < ActiveRecord::Migration[7.1]
       t.string :clear_transaction_hash
       t.integer :clear_block_number
       t.integer :clear_block_timestamp
+
+      t.timestamps
     end
     add_index :messages, :msg_hash, unique: true
     add_index :messages, :root, unique: true
