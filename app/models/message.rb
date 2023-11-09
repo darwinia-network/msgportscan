@@ -97,12 +97,12 @@ class Message < ApplicationRecord
       partial: 'messages/message',
       locals: { message: self }
     )
-    # broadcast_replace_to(
-    #   'messages_count',
-    #   target: 'messages_count',
-    #   partial: 'messages/messages_count',
-    #   locals: { messages_count: Message.count }
-    # )
+    broadcast_replace_to(
+      'messages_count',
+      target: 'messages_count',
+      partial: 'messages/messages_count',
+      locals: { messages_count: Message.count }
+    )
   end
 
   after_update_commit do

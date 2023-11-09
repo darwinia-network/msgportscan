@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: %i[show]
+  before_action -> { @messages_count = Message.count }, only: %i[index show]
 
   # GET /messages or /messages.json
   def index
