@@ -10,17 +10,17 @@ module ApplicationHelper
   def address_link_short(network, address, contract)
     display = contract&.name || short(address)
     url = File.join(network.explorer, 'address', address)
-    %(<a href="#{url}" class="underline">#{display}</a>).html_safe
+    %(<a href="#{url}" class="underline" target="_blank">#{display}</a>).html_safe
   end
 
   def transaction_link(network, tx_hash)
     url = File.join(network.explorer, 'tx', tx_hash)
-    %(<a href="#{url}" class="underline">#{tx_hash}</a>).html_safe
+    %(<a href="#{url}" class="underline" target="_blank">#{tx_hash}</a>).html_safe
   end
 
   def block_link(network, block_number)
     url = File.join(network.explorer, 'block', block_number.to_s)
-    %(<a href="#{url}" class="underline">#{block_number}</a>).html_safe
+    %(<a href="#{url}" class="underline" target="_blank">#{block_number}</a>).html_safe
   end
 
   def from_link(message)
@@ -33,13 +33,13 @@ module ApplicationHelper
       ea_url = File.join(network.explorer, 'address', source_ea)
       ua_url = File.join(network.explorer, 'address', source_ua)
       %(
-        <a href="#{ea_url}" class="underline text-xs">#{source_ea}</a></br>
-        ╰╴<a href="#{ua_url}" class="underline">#{"#{source_ua}(#{contract.name})"}</a>
+        <a href="#{ea_url}" class="underline text-xs" target="_blank">#{source_ea}</a></br>
+        ╰╴<a href="#{ua_url}" class="underline" target="_blank">#{"#{source_ua}(#{contract.name})"}</a>
       ).html_safe
     else
       display = message.from
       url = File.join(network.explorer, 'address', message.from)
-      %(<a href="#{url}" class="underline">#{display}</a>).html_safe
+      %(<a href="#{url}" class="underline" target="_blank">#{display}</a>).html_safe
     end
   end
 
@@ -54,13 +54,13 @@ module ApplicationHelper
       ua_url = File.join(network.explorer, 'address', target_ua)
       ea_url = File.join(network.explorer, 'address', target_ea)
       %(
-        <a href="#{ua_url}" class="underline">#{target_ua}(#{contract.name})</a></br>
-        ╰╴<a href="#{ea_url}" class="underline text-xs">#{target_ea}</a>
+        <a href="#{ua_url}" class="underline" target="_blank">#{target_ua}(#{contract.name})</a></br>
+        ╰╴<a href="#{ea_url}" class="underline text-xs" target="_blank">#{target_ea}</a>
       ).html_safe
     else
       display = message.to
       url = File.join(network.explorer, 'address', message.to)
-      %(<a href="#{url}" class="underline">#{display}</a>).html_safe
+      %(<a href="#{url}" class="underline" target="_blank">#{display}</a>).html_safe
     end
   end
 end
