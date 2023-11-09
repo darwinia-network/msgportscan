@@ -90,7 +90,9 @@ class Message < ApplicationRecord
     "#{from_network.name}->#{to_network.name}"
   end
 
-  after_create_commit do
+  after_commit :broadcast_message
+
+  def broadcast_message
     broadcast_prepend_to(
       'messages',
       target: 'messages',
@@ -103,9 +105,6 @@ class Message < ApplicationRecord
       partial: 'messages/messages_count',
       locals: { messages_count: Message.count }
     )
-  end
-
-  after_update_commit do
     broadcast_replace_to(
       'messages',
       target: "message_#{identifier}",
