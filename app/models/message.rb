@@ -90,6 +90,36 @@ class Message < ApplicationRecord
     "#{from_network.name}->#{to_network.name}"
   end
 
+  after_create_commit do
+    broadcast_prepend_to(
+      'messages',
+      target: 'messages',
+      partial: 'messages/message',
+      locals: { message: self }
+    )
+    # broadcast_replace_to(
+    #   'messages_count',
+    #   target: 'messages_count',
+    #   partial: 'messages/messages_count',
+    #   locals: { messages_count: Message.count }
+    # )
+  end
+
+  after_update_commit do
+    broadcast_replace_to(
+      'messages',
+      target: "message_#{identifier}",
+      partial: 'messages/message',
+      locals: { message: self }
+    )
+    broadcast_replace_to(
+      'message',
+      target: "message_#{identifier}",
+      partial: 'messages/show_message',
+      locals: { message: self }
+    )
+  end
+
   # join query example:
   # message_of_root = Message.joins("INNER JOIN pug_sub_api_aggregated_ormp_data ON messages.root = pug_sub_api_aggregated_ormp_data.ormp_data_root")
   #   .where("pug_sub_api_aggregated_ormp_data.pug_network_id = ?", to_network.id)
