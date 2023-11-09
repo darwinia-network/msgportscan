@@ -28,6 +28,8 @@
 #  msgport_payload           :text
 #  msgport_from              :string
 #  msgport_to                :string
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
 #
 class Message < ApplicationRecord
   belongs_to :from_network, class_name: 'Pug::Network', foreign_key: 'from_network_id'
@@ -93,30 +95,33 @@ class Message < ApplicationRecord
   after_commit :broadcast_message
 
   def broadcast_message
-    broadcast_prepend_to(
-      'messages',
-      target: 'messages',
-      partial: 'messages/message',
-      locals: { message: self }
-    )
-    broadcast_replace_to(
-      'messages_count',
-      target: 'messages_count',
-      partial: 'messages/messages_count',
-      locals: { messages_count: Message.count }
-    )
-    broadcast_replace_to(
-      'messages',
-      target: "message_#{identifier}",
-      partial: 'messages/message',
-      locals: { message: self }
-    )
-    broadcast_replace_to(
-      'message',
-      target: "message_#{identifier}",
-      partial: 'messages/show_message',
-      locals: { message: self }
-    )
+    if updated_at.to_s == created_at.to_s
+      broadcast_prepend_to(
+        'messages',
+        target: 'messages',
+        partial: 'messages/message',
+        locals: { message: self }
+      )
+      broadcast_replace_to(
+        'messages_count',
+        target: 'messages_count',
+        partial: 'messages/messages_count',
+        locals: { messages_count: Message.count }
+      )
+    else
+      broadcast_replace_to(
+        'messages',
+        target: "message_#{identifier}",
+        partial: 'messages/message',
+        locals: { message: self }
+      )
+      broadcast_replace_to(
+        'message',
+        target: "message_#{identifier}",
+        partial: 'messages/show_message',
+        locals: { message: self }
+      )
+    end
   end
 
   # join query example:
