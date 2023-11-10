@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_09_150448) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_08_053635) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,8 +42,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_09_150448) do
     t.text "msgport_payload"
     t.string "msgport_from"
     t.string "msgport_to"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.index ["msg_hash"], name: "index_messages_on_msg_hash", unique: true
     t.index ["root"], name: "index_messages_on_root", unique: true
   end
