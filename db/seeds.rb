@@ -29,7 +29,7 @@ end
 puts "Imported #{Pug::Network.count} networks."
 
 puts '-- Add Pug::EvmContract records'
-chain_ids = [421_614, 44]
+chain_ids = Rails.application.config.ormpscan2['chains']
 chain_ids.each_with_index do |chain_id, i|
   latest = JSON.parse URI.open("https://raw.githubusercontent.com/darwinia-network/ORMP/main/script/output/#{chain_id}/deploy.a-latest.json").read
   lastest_subapi = JSON.parse URI.open("https://raw.githubusercontent.com/subapidao/subapi/main/script/output/#{chain_id}/deploy.a-latest.json").read

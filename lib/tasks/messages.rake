@@ -2,7 +2,8 @@ namespace :messages do
   desc 'Start tracing messages'
   task trace: :environment do
     $stdout.sync = true
-    networks = Pug::Network.where(name: %w[crab arb_sep])
+    chain_ids = Rails.application.config.ormpscan2['chains']
+    networks = Pug::Network.where(chain_id: chain_ids)
 
     loop do
       puts '= SYNCRONIZING ==============================='
