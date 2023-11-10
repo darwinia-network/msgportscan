@@ -35,7 +35,7 @@ def add_contract(network, contract_address, api_key = nil)
   else
     puts `rails 'pug:add_contract[#{network.chain_id},#{contract_address}]'`
   end
-  sleep(2)
+  sleep(6)
 end
 
 puts '-- Add Pug::EvmContract records'
