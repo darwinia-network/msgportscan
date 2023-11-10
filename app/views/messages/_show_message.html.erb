@@ -1,11 +1,19 @@
 
     <div id="message_<%= message.identifier %>">
       <div class="mt-5 border-gray-100">
+        <dl class="divide-y divide-gray-100">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm font-medium leading-6 text-gray-900">Direction</dt>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+      <%= link_to message.from_network.name, network_messages_path(message.from_network.name), class: 'underline'  %>
+      ->
+      <%= link_to message.to_network.name, network_messages_path('_', message.to_network.name), class: 'underline'  %>
+            </dd>
+          </div>
           <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Index</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= message.index %></dd>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">#<%= message.index %></dd>
           </div>
-        <dl class="divide-y divide-gray-100">
           <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Status</dt>
             <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
