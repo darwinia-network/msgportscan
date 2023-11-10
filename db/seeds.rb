@@ -28,16 +28,34 @@ networks.each do |network|
 end
 puts "Imported #{Pug::Network.count} networks."
 
+def add_contract(network, contract_address, api_key = nil)
+  puts "api_key: #{api_key}"
+  if api_key.present?
+    puts `ETHERSCAN_API_KEY=#{api_key} rails 'pug:add_contract[#{network.chain_id},#{contract_address}]'`
+  else
+    puts `rails 'pug:add_contract[#{network.chain_id},#{contract_address}]'`
+  end
+  sleep(2)
+end
+
 puts '-- Add Pug::EvmContract records'
 chain_ids = Rails.application.config.ormpscan2['chains']
 chain_ids.each_with_index do |chain_id, i|
+  puts "#{i}. Chain ID: #{chain_id}"
+
   latest = JSON.parse URI.open("https://raw.githubusercontent.com/darwinia-network/ORMP/main/script/output/#{chain_id}/deploy.a-latest.json").read
   lastest_subapi = JSON.parse URI.open("https://raw.githubusercontent.com/subapidao/subapi/main/script/output/#{chain_id}/deploy.a-latest.json").read
   lastest_ormp_line = JSON.parse URI.open("https://raw.githubusercontent.com/darwinia-network/darwinia-msgport/main/script/output/#{chain_id}/deploy_ormp_line.a-latest.json").read
-  puts "#{i}. Chain ID: #{chain_id}"
-  puts `rails 'pug:add_contract[#{chain_id},#{latest['ORMP']}]'`
-  puts `rails 'pug:add_contract[#{chain_id},#{latest['ORACLE']}]'`
-  puts `rails 'pug:add_contract[#{chain_id},#{latest['RELAYER']}]'`
-  puts `rails 'pug:add_contract[#{chain_id},#{lastest_subapi['SUBAPI']}]'`
-  puts `rails 'pug:add_contract[#{chain_id},#{lastest_ormp_line['ORMP_LINE']}]'`
+
+  network = Pug::Network.find_by(chain_id:)
+
+  require 'dotenv'
+  Dotenv.load
+  api_key = ENV["EXPLORER_#{network.name.underscore.upcase}_API_KEY"]
+
+  add_contract(network, latest['ORMP'], api_key)
+  add_contract(network, latest['ORACLE'], api_key)
+  add_contract(network, latest['RELAYER'], api_key)
+  add_contract(network, lastest_subapi['SUBAPI'], api_key)
+  add_contract(network, lastest_ormp_line['ORMP_LINE'], api_key)
 end
