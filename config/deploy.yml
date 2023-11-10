@@ -29,6 +29,12 @@ servers:
     options:
       add-host: host.docker.internal:host-gateway
     cmd: "bundle exec ./bin/rails messages:trace"
+  job3:
+    hosts:
+      - 123.58.217.13
+    options:
+      add-host: host.docker.internal:host-gateway
+    cmd: "bundle exec ./bin/rails touch"
 
 # Credentials for your image host.
 registry:
