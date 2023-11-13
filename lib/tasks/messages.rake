@@ -45,32 +45,6 @@ def check_failed_messages(networks)
     message.clear_block_timestamp = clear_event.evm_log.timestamp
     message.status = :cleared
     message.save!
-    next
-
-    # CHECK IF RETRIED, AND RECORD RETRIES
-    # latest_retry_db = message.retries.last # find last retry of this message in database
-    # block_timestamp = latest_retry_db.nil? ? message.block_timestamp : latest_retry_db.block_timestamp
-    #
-    # retries = MessageCheck.retry_events(message, block_timestamp)
-    # next if retries.empty?
-    #
-    # retries.each do |retry_event|
-    #   Retry.create!(
-    #     message:,
-    #     transaction_hash: retry_event['transactionHash'],
-    #     block_number: retry_event['blockNumber'],
-    #     block_timestamp: retry_event['blockTimestamp'],
-    #     dispatch_result: retry_event['dispatchResult']
-    #   )
-    # end
-    #
-    # # UPDATE MESSAGE STATUS
-    # last_retry = retries.last
-    # message.update! status: if last_retry['dispatchResult']
-    #                           Message.statuses[:dispatch_success]
-    #                         else
-    #                           Message.statuses[:dispatch_failed]
-    #                         end
   end
 end
 
@@ -120,6 +94,7 @@ def sync_accepted_messages(network)
         to_chain_id: event.message_to_chain_id,
         to: event.message_to,
         encoded: event.message_encoded,
+        gas_limit: event.message_gas_limit,
         block_number: event.evm_log.block_number,
         block_timestamp: event.evm_log.timestamp,
         transaction_hash: event.evm_log.transaction_hash,

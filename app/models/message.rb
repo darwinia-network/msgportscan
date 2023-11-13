@@ -30,8 +30,7 @@
 #  msgport_payload           :text
 #  msgport_from              :string
 #  msgport_to                :string
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
+#  gas_limit                 :bigint
 #
 class Message < ApplicationRecord
   belongs_to :from_network, class_name: 'Pug::Network', foreign_key: 'from_network_id'
