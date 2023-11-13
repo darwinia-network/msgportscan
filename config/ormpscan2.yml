@@ -7,5 +7,5 @@ test:
 
 production:
   chains: 
-    - 42161
-    - 46
+    - 421614
+    - 44
