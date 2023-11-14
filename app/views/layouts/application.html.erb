@@ -22,9 +22,9 @@
         <a href="/">Darwinia Messages Explorer</a>
         <%= render "messages/messages_count", messages_count: @messages_count %>
       </header>
-      <main class="h-90 flex-1 px-4">
+      <main class="h-90 px-4">
         <%= form_with url: "/message", method: :get do |form| %>
-          <%= form.text_field :tx_or_hash, class: "ml-6 mr-6 mb-2 p-1.5 text-md bg-transparent", style: "border: 1px solid lightgrey; width: 70%", placeholder: "tx hash or msg hash" %>
+          <%= form.text_field :tx_or_hash, class: "ml-6 mr-6 mb-2 p-1.5 text-md bg-transparent", style: "border: 1px solid lightgrey; width: 90%", placeholder: "tx hash or msg hash" %>
         <% end %>
 
         <%= yield %>
