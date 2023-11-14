@@ -17,6 +17,14 @@ class MessagesController < ApplicationController
   # GET /messages/1 or /messages/1.json
   def show; end
 
+  def message
+    if params[:tx_or_hash].start_with?('0x')
+      redirect_to message_by_tx_or_hash_path(params[:tx_or_hash])
+    else
+      redirect_to messages_path
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
