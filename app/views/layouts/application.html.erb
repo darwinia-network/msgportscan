@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ormpscan2</title>
+    <title>Darwinia Messages Explorer</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -19,13 +19,13 @@
 
     <div class="flex flex-col">
       <header class="p-4 pt-5 ml-6 text-2xl text-left" style="font-family: system-ui">
-        <a href="/">Darwinia Msgport Explorer</a>
+        <a href="/">Darwinia Messages Explorer</a>
         <%= render "messages/messages_count", messages_count: @messages_count %>
       </header>
       <main class="h-90 flex-1 px-4">
         <%= yield %>
       </main>
-      <footer class="p-4 ml-6 text-sm text-left" style="font-family: system-ui"><a href="https://darwinia.network/">Darwinia</a> 2023</footer>
+      <footer class="p-4 ml-6 text-sm text-left" style="font-family: system-ui">©️ 2023 <a href="https://darwinia.network/">Darwinia</a></footer>
     </div>
 
   </body>
