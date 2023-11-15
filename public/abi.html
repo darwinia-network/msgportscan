@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ABI Encode/Decode</title>
+    <script src="https://cdn.jsdelivr.net/npm/ruby-3_2-wasm-wasi@2.1.0/dist/browser.script.iife.js"></script>
+    <script type="text/ruby" src="./abi.rb"></script>
+    <script type="text/ruby">
+      require "js"
+      require "json"
+      module ABI
+        extend AbiCoderRb
+      end
+
+      document = JS.global[:document]
+      search_button = document.getElementById "btnEncode"
+      search_button.addEventListener "click" do
+        types = JSON.parse(document.getElementById("types")[:value].to_s)
+        values = JSON.parse(document.getElementById("values")[:value].to_s)
+        result = ABI.encode(types, values)
+        document.getElementById("result")[:innerHTML] = ABI.bin_to_hex(result)
+      end
+    </script>
+
+    <style type="text/css">
+      * {
+        box-sizing: border-box;
+      }
+      pre {
+        white-space: pre-wrap;       /* Since CSS 2.1 */
+        white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+        white-space: -pre-wrap;      /* Opera 4-6 */
+        white-space: -o-pre-wrap;    /* Opera 7 */
+        word-wrap: break-word;       /* Internet Explorer 5.5+ */
+      }
+    </style>
+</head>
+<body>
+    <form>
+      <p>
+        <div>types: </div>
+        <input type="text" id="types" name="types" value="[&quot;uint256&quot;, &quot;(uint256,string)&quot;]" style="width: 100%"></input>
+              
+      </p>
+      <p>
+        <div>values: </div>
+        <input type="text" id="values" name="values" value="[1234, [1234, &quot;Hello World&quot;]]" style="width: 100%">
+      </p>
+      <p>
+        <button type="button" id="btnEncode">encode</button>
+      </p>
+    </form>
+    <pre style="width: 100%;" id="result"></pre>
+    
+</body>
+</html>
