@@ -2,33 +2,33 @@
     <div id="message_<%= message.identifier %>">
       <div class="mt-5 border-gray-100">
         <dl class="divide-y divide-gray-100">
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Direction</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0">
       <%= link_to message.from_network.name, network_messages_path(message.from_network.name), class: 'underline'  %>
       ->
       <%= link_to message.to_network.name, network_messages_path('_', message.to_network.name), class: 'underline'  %>
             </dd>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Index</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">#<%= message.index %></dd>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0">#<%= message.index %></dd>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Status</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0">
                 <span class="<%= status_style(message.status) %>">
                 <%= message.status_label %>
                 </span>
             </dd>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Message Hash</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= message.msg_hash %></dd>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0"><%= message.msg_hash %></dd>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Message</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0">
               <div style="overflow-wrap: break-word;">
                 <% if message.msgport_payload.blank?  %>
                   <%= message.encoded %>
@@ -40,89 +40,91 @@
               </div>
             </dd>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Message Gas Limit</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= message.gas_limit %></dd>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0"><%= message.gas_limit %></dd>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Message Root</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= message.root %></dd>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0"><%= message.root %></dd>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Proof</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              <pre style="font-family: 'Overpass Mono', monospace"><%= message.proof.nil? ? '' : JSON.pretty_generate(message.proof) %></pre>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0">
+              <div style="overflow-wrap: break-word;">
+                <%= message.proof.nil? ? '' : message.proof %>
+              </div>
             </dd>
           </div>
 
           <!-- SOURCE CHAIN -->
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-xl font-medium leading-6 text-gray-900"><%= message.from_network.display_name %> <div class="text-sm">SOURCE CHAIN</div></dt>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Source Chain Id</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= message.from_network.chain_id %></dd>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0"><%= message.from_network.chain_id %></dd>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">From Address</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= from_link(message) %></dd>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0"><%= from_link(message) %></dd>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Transaction Hash</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= transaction_link(message.from_network, message.transaction_hash) %></dd>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0"><%= transaction_link(message.from_network, message.transaction_hash) %></dd>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Block Number</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= block_link(message.from_network, message.block_number) %></dd>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0"><%= block_link(message.from_network, message.block_number) %></dd>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Block Timestamp</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= Time.at(message.block_timestamp) %></dd>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0"><%= Time.at(message.block_timestamp) %></dd>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Age</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= time_ago_in_words(Time.at(message.block_timestamp)) %> ago</dd>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0"><%= time_ago_in_words(Time.at(message.block_timestamp)) %> ago</dd>
           </div>
 
           <!-- TARGET CHAIN -->
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-xl font-medium leading-6 text-gray-900"><%= message.to_network.display_name %> <div class="text-sm">TARGET CHAIN</div></dt>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Target Chain Id</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= message.to_network.chain_id %></dd>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0"><%= message.to_network.chain_id %></dd>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">To Address</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= to_link(message) %></dd>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0"><%= to_link(message) %></dd>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Dispatch Transaction Hash</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0">
               <% if message.dispatch_transaction_hash %>
                 <%= transaction_link(message.to_network, message.dispatch_transaction_hash) %>
               <% end %>
             </dd>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Dispatch Block Number</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0">
               <% if message.dispatch_block_number %>
                 <%= block_link(message.to_network, message.dispatch_block_number) %>
               <% end %>
             </dd>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Dispatch Block Timestamp</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0">
               <% if message.dispatch_block_timestamp %>
                 <%= Time.at(message.dispatch_block_timestamp) %>
               <% end %>
             </dd>
           </div>
-          <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <div class="px-4 py-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">Send-to-Dispatch Time Spent</dt>
-            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0">
               <% if message.dispatch_block_timestamp %>
                 <%= time_consumption(message) %>
               <% end %>
