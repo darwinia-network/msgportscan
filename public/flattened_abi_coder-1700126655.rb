@@ -1,5 +1,4 @@
-
-# ./lib/abi_coder_rb/decode/decode_array.rb
+# Generated from https://github.com/wuminzhe/abi_coder_rb
 module AbiCoderRb
   def decode_array(type, data)
     l = decode_uint256(data[0, 32])
@@ -16,8 +15,6 @@ module AbiCoderRb
     end
   end
 end
-
-# ./lib/abi_coder_rb/decode/decode_fixed_array.rb
 module AbiCoderRb
   def decode_fixed_array(type, data)
     l = type.dim
@@ -32,8 +29,6 @@ module AbiCoderRb
     end
   end
 end
-
-# ./lib/abi_coder_rb/decode/decode_primitive_type.rb
 module AbiCoderRb
   def decode_primitive_type(type, data)
     case type
@@ -63,15 +58,11 @@ module AbiCoderRb
     bin_to_hex(bin).to_i(16)
   end
 end
-
-# ./lib/abi_coder_rb/decode/decode_tuple.rb
 module AbiCoderRb
   def decode_tuple(type, data)
     decode_types(type.types, data)
   end
 end
-
-# ./lib/abi_coder_rb/decode.rb
 module AbiCoderRb
   def decode(types, data)
     types = types.map { |type| type.is_a?(Type) ? type : Type.parse(type) }
@@ -113,8 +104,6 @@ module AbiCoderRb
     start_positions
   end
 end
-
-# ./lib/abi_coder_rb/encode/encode_array.rb
 module AbiCoderRb
   def encode_array(type, args)
     raise ArgumentError, "arg must be an array" unless args.is_a?(::Array)
@@ -133,8 +122,6 @@ module AbiCoderRb
     head + tail
   end
 end
-
-# ./lib/abi_coder_rb/encode/encode_fixed_array.rb
 module AbiCoderRb
   def encode_fixed_array(type, args)
     raise ArgumentError, "arg must be an array" unless args.is_a?(::Array)
@@ -142,8 +129,6 @@ module AbiCoderRb
     args.map { |arg| encode_type(type.subtype, arg) }.join
   end
 end
-
-# ./lib/abi_coder_rb/encode/encode_primitive_type.rb
 module AbiCoderRb
   def encode_primitive_type(type, arg)
     case type
@@ -184,7 +169,7 @@ module AbiCoderRb
   end
   def encode_string(arg)
     raise EncodingError, "Expecting string: #{arg}" unless arg.is_a?(::String)
-    arg = arg.b if arg.encoding != 'BINARY' ## was: name == 'UTF-8', wasm
+    arg = arg.b if arg.encoding != "BINARY" ## was: name == 'UTF-8', wasm
     raise ValueOutOfBounds, "Integer invalid or out of range: #{arg.size}" if arg.size > UINT_MAX
     size  =  lpad_int(arg.size)
     value =  rpad(arg, ceil32(arg.size))
@@ -192,6 +177,7 @@ module AbiCoderRb
   end
   def encode_bytes(arg, length = nil)
     raise EncodingError, "Expecting string: #{arg}" unless arg.is_a?(::String)
+    arg = hex_to_bin(arg) if hex?(arg)
     arg = arg.b if arg.encoding != Encoding::BINARY
     if length # fixed length type
       raise ValueOutOfBounds, "invalid bytes length #{length}" if arg.size > length
@@ -231,29 +217,25 @@ module AbiCoderRb
   def lpad_int(n)
     raise ArgumentError, "Integer invalid or out of range: #{n}" unless n.is_a?(Integer) && n >= 0 && n <= UINT_MAX
     hex = n.to_s(16)
-    hex = "0#{hex}" if hex.length % 2 != 0 # wasm, no .odd
-    bin = hex(hex)
+    hex = "0#{hex}" if hex.length.odd? # wasm, no .odd
+    bin = hex_to_bin(hex)
     lpad(bin)
   end
   def lpad_hex(hex)
     raise TypeError, "Value must be a string" unless hex.is_a?(::String)
     raise TypeError, "Non-hexadecimal digit found" unless hex =~ /\A[0-9a-fA-F]*\z/
-    bin = hex(hex)
+    bin = hex_to_bin(hex)
     lpad(bin)
   end
   def ceil32(x)
     x % 32 == 0 ? x : (x + 32 - x % 32)
   end
 end
-
-# ./lib/abi_coder_rb/encode/encode_tuple.rb
 module AbiCoderRb
   def encode_tuple(tuple, args)
     encode_types(tuple.types, args)
   end
 end
-
-# ./lib/abi_coder_rb/encode.rb
 module AbiCoderRb
   def encode(types, args)
     types = types.map { |type| type.is_a?(Type) ? type : Type.parse(type) }
@@ -289,8 +271,6 @@ module AbiCoderRb
     head + tail
   end
 end
-
-# ./lib/abi_coder_rb/parser.rb
 module AbiCoderRb
   class Type
     class ParseError < StandardError; end
@@ -393,8 +373,6 @@ module AbiCoderRb
     end # class Parser
   end #  class Type
 end  # module ABI
-
-# ./lib/abi_coder_rb/types.rb
 module AbiCoderRb
   class Type
     def self.parse(type) ## convenience helper
@@ -557,13 +535,9 @@ module AbiCoderRb
     end
   end # class Tuple
 end  # module ABI
-
-# ./lib/abi_coder_rb/version.rb
 module AbiCoderRb
   VERSION = "0.1.0"
 end
-
-# ./lib/abi_coder_rb.rb
 module AbiCoderRb
   class DecodingError < StandardError; end
   class EncodingError < StandardError; end
@@ -584,4 +558,8 @@ module AbiCoderRb
     bin.each_byte.map { |byte| "%02x" % byte }.join
   end
   alias bin bin_to_hex
+  def hex?(str)
+    str = str[2..] if %w[0x 0X].include?(str[0, 2]) ## cut-of leading 0x or 0X if present
+    str.match?(/\A\b[0-9a-fA-F]+\b\z/) && str.length.even?
+  end
 end
