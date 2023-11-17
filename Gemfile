@@ -71,7 +71,7 @@ end
 
 gem 'annotate', '~> 3.2'
 gem 'eth', github: 'wuminzhe/eth.rb'
-gem 'pug', github: 'wuminzhe/pug'
+gem 'pug', github: 'wuminzhe/pug', branch: 'logs-jsonb'
 # gem 'pug', path: '/workspaces/pug'
 
 gem 'dotenv', '~> 2.8'
