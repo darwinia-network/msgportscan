@@ -22,7 +22,7 @@ servers:
       - 123.58.217.13
     options:
       add-host: host.docker.internal:host-gateway
-    cmd: "bundle exec ./bin/rails pug:fetch_logs_all"
+    cmd: "bundle exec ./bin/pug"
   job2:
     hosts:
       - 123.58.217.13
