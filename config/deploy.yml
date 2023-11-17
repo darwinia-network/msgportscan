@@ -22,7 +22,7 @@ servers:
       - 123.58.217.13
     options:
       add-host: host.docker.internal:host-gateway
-    cmd: "bundle exec ./bin/pug"
+    cmd: "bin/pug"
   job2:
     hosts:
       - 123.58.217.13
