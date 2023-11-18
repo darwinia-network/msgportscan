@@ -120,5 +120,5 @@ def latest_message_accepted_evm_logs(network)
 
   Pug::EvmLog.with_network(network)
              .with_event('MessageAccepted')
-             .field_gt('message_index', last_message_index)
+             .where("(decoded->>'message_index')::int > ?", last_message_index)
 end
