@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
     @messages = @messages.where(from_network:) if from_network.present?
     @messages = @messages.where(to_network:) if to_network.present?
     @messages = @messages.where(status: params[:status]) if params[:status].present?
-    @messages = @messages.order(block_timestamp: :desc).limit(100)
+    @messages = @messages.order(block_timestamp: :desc).page(params[:page]).per(25)
   end
 
   # GET /messages/1 or /messages/1.json

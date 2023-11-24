@@ -75,3 +75,4 @@ gem 'pug', github: 'wuminzhe/pug', branch: 'logs-jsonb'
 # gem 'pug', path: '/workspaces/pug'
 
 gem 'dotenv', '~> 2.8'
+gem 'kaminari'
