@@ -2,6 +2,7 @@ development:
   chains: 
     - 421614
     - 44
+    - 11155111
 
 test:
 
@@ -9,3 +10,4 @@ production:
   chains: 
     - 421614
     - 44
+    - 11155111

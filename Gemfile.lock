@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/wuminzhe/pug.git
-  revision: b106a96be860ac3c96309d49b252cf806b2693e4
+  revision: 4f42a69292013bdc0f10436f9435ba46d1e4ceba
   branch: logs-jsonb
   specs:
     pug (0.1.0)
