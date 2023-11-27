@@ -31,7 +31,7 @@ end
 
 # root_ready -> dispatch_success/dispatch_failed
 def check_root_ready_messages(networks)
-  messages = Message.where(from_network: networks, to_network: networks, status: :root_ready)
+  messages = Message.where(from_network: networks, to_network: networks, status: %i[accepted root_ready])
   messages.each do |message|
     dispatched_log = Pug::EvmLog.with_event('MessageDispatched')
                                 .field_eq('msg_hash', message.msg_hash)
