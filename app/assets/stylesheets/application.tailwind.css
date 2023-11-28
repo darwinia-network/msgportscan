@@ -3,8 +3,16 @@
 @tailwind utilities;
 
 html, body {
- font-family: 'Overpass Mono', monospace;
- background-color: rgb(252, 251, 248);
+  background-color: rgb(252, 251, 248);
+}
+
+table, dd {
+  font-family: 'Overpass Mono', monospace;
+}
+
+.pagination a {
+  font-size: 14px;
+  text-decoration: underline;
 }
 
 /* 

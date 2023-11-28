@@ -18,7 +18,7 @@
     <%= turbo_stream_from("messages_count") %>
 
     <div class="flex flex-col">
-      <header class="p-4 pt-5 ml-6 text-2xl text-left" style="font-family: system-ui">
+      <header class="p-4 pt-5 ml-6 text-2xl text-left">
         <a href="/">Darwinia Messages Explorer</a>
         <%= render "messages/messages_count", messages_count: @messages_count %>
       </header>
@@ -31,7 +31,7 @@
 
         <%= yield %>
       </main>
-      <footer class="p-4 ml-6 text-sm text-left" style="font-family: system-ui">©️ 2023 <a href="https://darwinia.network/">Darwinia</a></footer>
+      <footer class="p-4 ml-6 text-sm text-left">©️ 2023 <a href="https://darwinia.network/">Darwinia</a></footer>
     </div>
 
   </body>
