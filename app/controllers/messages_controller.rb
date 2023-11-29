@@ -19,6 +19,7 @@ class MessagesController < ApplicationController
 
   def message
     if params[:tx_or_hash].start_with?('0x')
+      # query from form
       redirect_to message_by_tx_or_hash_path(params[:tx_or_hash])
     else
       redirect_to messages_path
@@ -44,7 +45,7 @@ class MessagesController < ApplicationController
 
     # 404
     respond_to do |format|
-      format.html { render file: "#{Rails.root}/public/404.html", status: :not_found }
+      format.html { render file: "#{Rails.root}/public/404.html" }
       format.json { render json: { error: 'Not Found' }, status: :not_found }
     end
   end
