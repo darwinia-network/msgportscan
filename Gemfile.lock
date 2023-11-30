@@ -12,15 +12,18 @@ GIT
 
 GIT
   remote: https://github.com/wuminzhe/pug.git
-  revision: 4f42a69292013bdc0f10436f9435ba46d1e4ceba
+  revision: 04799feb5b7ccc0ff78c1828a685615bbf953607
   branch: logs-jsonb
   specs:
     pug (0.1.0)
+      abi_coder_rb (~> 0.2.2)
       rails (>= 7.1.1)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    abi_coder_rb (0.2.2)
+      activesupport
     actioncable (7.1.2)
       actionpack (= 7.1.2)
       activesupport (= 7.1.2)
@@ -175,7 +178,7 @@ GEM
     minitest (5.20.0)
     msgpack (1.7.2)
     mutex_m (0.2.0)
-    net-imap (0.4.6)
+    net-imap (0.4.7)
       date
       net-protocol
     net-pop (0.1.2)
@@ -247,7 +250,7 @@ GEM
     redis-client (0.18.0)
       connection_pool
     regexp_parser (2.8.2)
-    reline (0.4.0)
+    reline (0.4.1)
       io-console (~> 0.5)
     rexml (3.2.6)
     ruby2_keywords (0.0.5)
@@ -267,7 +270,7 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (1.3.0)
       railties (>= 6.0.0)
-    stringio (3.0.9)
+    stringio (3.1.0)
     thor (1.3.0)
     timeout (0.4.1)
     turbo-rails (1.5.0)
