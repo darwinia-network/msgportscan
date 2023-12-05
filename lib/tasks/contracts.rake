@@ -28,11 +28,11 @@ end
 
 def add_contract(network, contract_address)
   api_key = ENV["EXPLORER_#{network.name.underscore.upcase}_API_KEY"]
-  puts "api_key: #{api_key}"
+  puts "API_KEY: #{api_key.nil? ? 'nil' : 'present'}"
   if api_key.present?
-    puts `ETHERSCAN_API_KEY=#{api_key} rails 'pug:add_contract[#{network.chain_id},#{contract_address}]'`
+    puts `ETHERSCAN_API_KEY=#{api_key} rails 'pug:add_contract[#{network.chain_id},#{contract_address}]' --trace`
   else
-    puts `rails 'pug:add_contract[#{network.chain_id},#{contract_address}]'`
+    puts `rails 'pug:add_contract[#{network.chain_id},#{contract_address}]' --trace`
   end
   sleep(10)
 end
