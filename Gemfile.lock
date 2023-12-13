@@ -12,11 +12,12 @@ GIT
 
 GIT
   remote: https://github.com/wuminzhe/pug.git
-  revision: 04799feb5b7ccc0ff78c1828a685615bbf953607
-  branch: logs-jsonb
+  revision: f3e79b34c793b03c9e1c725b847548623686de4e
+  branch: support-tron
   specs:
     pug (0.1.0)
       abi_coder_rb (~> 0.2.2)
+      etherscan (~> 0.3.0)
       rails (>= 7.1.1)
 
 GEM
@@ -104,7 +105,7 @@ GEM
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
     base64 (0.2.0)
-    bigdecimal (3.1.4)
+    bigdecimal (3.1.5)
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
@@ -131,6 +132,8 @@ GEM
     drb (2.2.0)
       ruby2_keywords
     erubi (1.12.0)
+    etherscan (0.3.0)
+      activesupport
     ffi (1.16.3)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
@@ -140,8 +143,8 @@ GEM
       activesupport (>= 6.1)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
-    io-console (0.6.0)
-    irb (1.9.1)
+    io-console (0.7.0)
+    irb (1.10.1)
       rdoc
       reline (>= 0.3.8)
     jbuilder (2.11.5)
@@ -178,7 +181,7 @@ GEM
     minitest (5.20.0)
     msgpack (1.7.2)
     mutex_m (0.2.0)
-    net-imap (0.4.7)
+    net-imap (0.4.8)
       date
       net-protocol
     net-pop (0.1.2)
@@ -187,7 +190,7 @@ GEM
       timeout
     net-smtp (0.4.0)
       net-protocol
-    nio4r (2.6.1)
+    nio4r (2.7.0)
     nokogiri (1.15.5-aarch64-linux)
       racc (~> 1.4)
     nokogiri (1.15.5-x86_64-linux)
@@ -243,7 +246,7 @@ GEM
       mini_portile2 (~> 2.8)
       pkg-config (~> 1.5)
       rubyzip (~> 2.3)
-    rdoc (6.6.0)
+    rdoc (6.6.1)
       psych (>= 4.0.0)
     redis (5.0.8)
       redis-client (>= 0.17.0)
