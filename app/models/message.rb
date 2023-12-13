@@ -124,19 +124,4 @@ class Message < ApplicationRecord
       )
     end
   end
-
-  # join query example:
-  # message_of_root = Message.joins("INNER JOIN pug_sub_api_aggregated_ormp_data ON messages.root = pug_sub_api_aggregated_ormp_data.ormp_data_root")
-  #   .where("pug_sub_api_aggregated_ormp_data.pug_network_id = ?", to_network.id)
-  #   .order("pug_sub_api_aggregated_ormp_data.timestamp DESC")
-  #   .first
-  def root_prepared?
-    latest_aggregated = Pug::SubApiAggregatedOrmpDatum.where(pug_network: to_network).order(timestamp: :desc).first
-    return false if latest_aggregated.nil?
-
-    message_of_root = Message.find_by_root(latest_aggregated.ormp_data_root)
-    return false if message_of_root.nil?
-
-    block_number <= message_of_root.block_number
-  end
 end
