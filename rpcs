@@ -1,0 +1,2 @@
+Pug::Network.find_by(chain_id: 1).update(rpc: "https://eth.llamarpc.com")
+Pug::Network.find_by(chain_id: 42161).update(rpc: "https://arbitrum.llamarpc.com")

@@ -1,0 +1,106 @@
+docker_app_path: /mnt/data/msgportscan
+docker_app_runner:
+  container:
+    msgportscan-web:
+      image: ghcr.io/darwinia-network/msgportscan:v0.1.6
+      ports:
+        - '127.0.0.1:10201:3000'
+      command:
+        - bundle
+        - exec
+        - rails
+        - s
+        - -p=3000
+      environment:
+        REDIS_URL: redis://msgportscan-redis:6379/0
+        POSTGRES_HOST: msgportscan-db
+        POSTGRES_USERNAME: postgres
+        POSTGRES_PASSWORD: Qh6a2a7YFyhH
+        RAILS_MASTER_KEY: 5f6942b8e8c607c2be8d64cc43c4b291
+        EXPLORER_ARB1_API_KEY: MV8SRCQZCB3SUU48XP7T7VV4YER63ZSS6H
+        EXPLORER_ETH_API_KEY: CQZEXX84G6AQ5R8AZCII626EA43VPNJEEU
+      raw:
+        depends_on:
+          - msgportscan-db
+          - msgportscan-redis
+    msgportscan-event-logs-tracing:
+      image: ghcr.io/darwinia-network/msgportscan:v0.1.6
+      command:
+        - bin/pug
+      environment:
+        REDIS_URL: redis://msgportscan-redis:6379/0
+        POSTGRES_HOST: msgportscan-db
+        POSTGRES_USERNAME: postgres
+        POSTGRES_PASSWORD: Qh6a2a7YFyhH
+        RAILS_MASTER_KEY: 5f6942b8e8c607c2be8d64cc43c4b291
+        EXPLORER_ARB1_API_KEY: MV8SRCQZCB3SUU48XP7T7VV4YER63ZSS6H
+        EXPLORER_ETH_API_KEY: CQZEXX84G6AQ5R8AZCII626EA43VPNJEEU
+      raw:
+        depends_on:
+          - msgportscan-db
+          - msgportscan-redis
+    msgportscan-tracing:
+      image: ghcr.io/darwinia-network/msgportscan:v0.1.6
+      command:
+        - bundle
+        - exec
+        - rails
+        - messages:trace
+      environment:
+        REDIS_URL: redis://msgportscan-redis:6379/0
+        POSTGRES_HOST: msgportscan-db
+        POSTGRES_USERNAME: postgres
+        POSTGRES_PASSWORD: Qh6a2a7YFyhH
+        RAILS_MASTER_KEY: 5f6942b8e8c607c2be8d64cc43c4b291
+      raw:
+        depends_on:
+          - msgportscan-db
+          - msgportscan-redis
+    msgportscan-touching:
+      image: ghcr.io/darwinia-network/msgportscan:v0.1.6
+      command:
+        - bundle
+        - exec
+        - rails
+        - touch
+      environment:
+        REDIS_URL: redis://msgportscan-redis:6379/0
+        POSTGRES_HOST: msgportscan-db
+        POSTGRES_USERNAME: postgres
+        POSTGRES_PASSWORD: Qh6a2a7YFyhH
+        RAILS_MASTER_KEY: 5f6942b8e8c607c2be8d64cc43c4b291
+      raw:
+        depends_on:
+          - msgportscan-db
+          - msgportscan-redis
+
+    msgportscan-db:
+      image: postgres:14-alpine
+      volumes:
+        - '{{ docker_app_path }}/data/postgres:/var/lib/postgresql/data'
+      environment:
+        POSTGRES_PASSWORD: Qh6a2a7YFyhH
+    msgportscan-redis:
+      image: redis:7-alpine
+      command:
+        - redis-server
+
+
+nginx_conf:
+  ssl:
+    - darwinia
+  proxy_endpoint:
+    name: msgportscan
+    endpoints:
+      - name: msgportscan
+        enable: true
+        domains:
+          - msgscan.darwinia.network
+        listen: 443
+        additional:
+          x_in_server: |
+            include /etc/nginx/conf.d/common/ssl/darwinia/ssl-cf-darwinia.conf;
+        locations:
+          - endpoint: http://127.0.0.1:10201
+
+
