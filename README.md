@@ -37,7 +37,7 @@
 2. update `config/ormpscan2.yml`.  
 
 3. add contracts of the new networks.  
-   `ETHERSCAN_API_KEY=#{api_key} rails 'pug:add_contract[#{network.chain_id},#{contract_address}]' --trace`
+   `ETHERSCAN_API_KEY=#{api_key} rails 'pug:add_contract[#{network.chain_id},#{contract_address}]' --trace`  
    NOTE1: you can manually add the contract. or, you can use helper task `rails contracts:add` to add all msgport and ormp contracts.  
    NOTE2: `pug:add_contract` depends on etherscan(-like) api to get contract creational info.  
    NOTE3: `ETHERSCAN_API_KEY` is optional, but without it, the api is limited to a small requests per second.  
