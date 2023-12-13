@@ -31,19 +31,19 @@
 
 # Add new contracts
 ## add new netowrks and their contracts
-1. (optional)update networks rpcs in rails console.
+1. (optional)update networks rpcs in rails console.  
    `Pug::Network.find_by(chain_id: 1).update rpc: 'https://ethereum.publicnode.com'`
 
-2. update `config/ormpscan2.yml`.
+2. update `config/ormpscan2.yml`.  
 
-3. add contracts of the new networks.
+3. add contracts of the new networks.  
    `ETHERSCAN_API_KEY=#{api_key} rails 'pug:add_contract[#{network.chain_id},#{contract_address}]' --trace`
    NOTE1: you can manually add the contract. or, you can use helper task `rails contracts:add` to add all msgport and ormp contracts.  
    NOTE2: `pug:add_contract` depends on etherscan(-like) api to get contract creational info.  
    NOTE3: `ETHERSCAN_API_KEY` is optional, but without it, the api is limited to a small requests per second.  
 
-4. update Procfile.pug, then rerun `bin/pug`.
-   `rails pug:procfile`
+4. update Procfile.pug, then rerun `bin/pug`.  
+   `rails pug:procfile`  
 
-## add new contract to an existing network
-1. add the contract to the network.
+## add new contract to an existing network  
+1. add the contract to the network.  
