@@ -43,7 +43,9 @@
    NOTE3: `ETHERSCAN_API_KEY` is optional, but without it, the api is limited to a small requests per second.  
 
 4. update Procfile.pug, then rerun `bin/pug`.  
-   `rails pug:procfile`  
+   `bin/rails pug:procfile`  
+
+5. rerun `bin/rails messages:trace`
 
 ## add new contract to an existing network  
 1. add the contract to the network.  
