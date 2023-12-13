@@ -17,6 +17,7 @@ display_name = 'Arbitrum Sepolia'
 rpc = "https://sepolia-rollup.arbitrum.io/rpc"
 explorer =  "https://sepolia.arbiscan.io"
 Pug::Network.create(chain_id: , name: , display_name: , rpc: , explorer: , scan_span: 2000)
+puts "`Arbitrum Sepolia` created."
 
 chain_id = 44
 name = 'crab'
@@ -24,6 +25,7 @@ display_name = 'Crab Network'
 rpc = "https://darwiniacrab-rpc.dwellir.com"
 explorer =  "https://crab.subscan.io"
 Pug::Network.create(chain_id: , name: , display_name: , rpc: , explorer: , scan_span: 2000)
+puts "`Crab Network` created."
 
 chain_id = 11155111
 name = 'sep'
@@ -31,6 +33,7 @@ display_name = 'Sepolia'
 rpc = "https://ethereum-sepolia.publicnode.com"
 explorer =  "https://sepolia.etherscan.io"
 Pug::Network.create(chain_id: , name: , display_name: , rpc: , explorer: , scan_span: 2000)
+puts "`Sepolia` created."
 
 # chain_id = 2494104990
 # name = 'tron_shasta'
@@ -45,6 +48,8 @@ display_name = 'Tron'
 rpc = "https://api.trongrid.io/jsonrpc"
 explorer =  "https://tronscan.io"
 Pug::Network.create(chain_id: , name: , display_name: , rpc: , explorer: , scan_span: 2000)
+puts "`Tron` created."
+
 puts "Imported #{Pug::Network.count} networks."
 
 
