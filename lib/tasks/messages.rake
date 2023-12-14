@@ -111,6 +111,12 @@ def skip_message?(message_accepted_log, network)
   # create message if not exists
   return true if Message.find_by(from_network: network, msg_hash: message_accepted_log.decoded['msg_hash'])
 
+  # 在主网环境下，从crab链发出的，但是目标不是主网链的消息，不处理
+  mainnet = Rails.application.config.ormpscan2['mainnet']
+  chains = Rails.application.config.ormpscan2['chains'].map(&:to_i).reject { |chain_id| chain_id == 44 }
+  right_target_chain = chains.include?(message_accepted_log.decoded['message.to_chain_id'].to_i)
+  return true if mainnet && network.chain_id == 44 && !right_target_chain
+
   false
 end
 
