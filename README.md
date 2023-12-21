@@ -29,23 +29,31 @@
 /messages/0x830962b211927e61720770bad65a8be0d56263fe33dc77b04229834a462b2f83 
 ```
 
-# Add new contracts
-## add new netowrks and their contracts
-1. (optional)update networks rpcs in rails console.  
-   `Pug::Network.find_by(chain_id: 1).update rpc: 'https://ethereum.publicnode.com'`
+## Add new network and contract
+* Add a network.
+   ```ruby
+   chain_id = 46
+   name = 'darwinia'
+   display_name = 'Darwinia Network'
+   rpc = 'https://rpc.darwinia.network'
+   explorer = 'https://darwinia.subscan.io'
+   Pug::Network.create(chain_id:, name:, display_name:, rpc:, explorer:, scan_span: 2000)
+   ```
 
-2. update `config/ormpscan2.yml`.  
+* Add a contract.  
+   ```bash
+   ETHERSCAN_API_KEY=#{api_key} bin/rails 'pug:add_contract[#{network.chain_id},#{contract_address}]' --trace
+   ```
+   NOTE: `pug:add_contract` depends on etherscan(-like) api to get contract creational info.  
 
-3. add contracts of the new networks.  
-   `ETHERSCAN_API_KEY=#{api_key} rails 'pug:add_contract[#{network.chain_id},#{contract_address}]' --trace`  
-   NOTE1: you can manually add the contract. or, you can use helper task `rails contracts:add` to add all msgport and ormp contracts.  
-   NOTE2: `pug:add_contract` depends on etherscan(-like) api to get contract creational info.  
-   NOTE3: `ETHERSCAN_API_KEY` is optional, but without it, the api is limited to a small requests per second.  
+* Update `Procfile.pug` if a new network was added.
+   ```bash
+   bin/rails pug:procfile
+   ```
 
-4. update Procfile.pug, then rerun `bin/pug`.  
-   `bin/rails pug:procfile`  
+## Start tracing
 
-5. rerun `bin/rails messages:trace`
-
-## add new contract to an existing network  
-1. add the contract to the network.  
+```bash
+bin/pug
+bin/rails messages:trace
+```
