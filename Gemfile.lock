@@ -10,8 +10,10 @@ GIT
       rbsecp256k1 (~> 6.0)
       scrypt (~> 3.0)
 
-PATH
-  remote: /workspaces/pug
+GIT
+  remote: https://github.com/wuminzhe/pug.git
+  revision: 06a04133a6c315aa984dca10f710e146618f580e
+  branch: tron-models
   specs:
     pug (0.1.0)
       abi_coder_rb (~> 0.2.3)

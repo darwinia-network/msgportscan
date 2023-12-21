@@ -1,8 +1,7 @@
 desc 'touch messages'
 task touch: :environment do
   $stdout.sync = true
-  chain_ids = Rails.application.config.ormpscan2['chains']
-  networks = Pug::Network.where(chain_id: chain_ids)
+  networks = Pug::Network.all
 
   loop do
     puts '= TOUCHING ==============================='
