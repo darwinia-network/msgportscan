@@ -10,20 +10,18 @@ GIT
       rbsecp256k1 (~> 6.0)
       scrypt (~> 3.0)
 
-GIT
-  remote: https://github.com/wuminzhe/pug.git
-  revision: f3e79b34c793b03c9e1c725b847548623686de4e
-  branch: support-tron
+PATH
+  remote: /workspaces/pug
   specs:
     pug (0.1.0)
-      abi_coder_rb (~> 0.2.2)
+      abi_coder_rb (~> 0.2.3)
       etherscan (~> 0.3.0)
       rails (>= 7.1.1)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    abi_coder_rb (0.2.2)
+    abi_coder_rb (0.2.3)
       activesupport
     actioncable (7.1.2)
       actionpack (= 7.1.2)
