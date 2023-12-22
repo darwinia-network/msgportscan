@@ -25,15 +25,24 @@ module Types
     field :message, Types::MessageType, null: true do
       argument :msg_hash, ID, required: true
     end
-
     def message(msg_hash:)
       Message.find_by(msg_hash:)
     end
 
     field :messages, [Types::MessageType], null: true
-
     def messages
       Message.all
+    end
+
+    field :ormp_message_accepteds, [Types::Pug::OrmpMessageAcceptedType], null: true do
+      argument :message_from_chain_id, Float, required: false
+      argument :message_to_chain_id, Float, required: false
+    end
+    def ormp_message_accepteds(message_from_chain_id: nil, message_to_chain_id: nil)
+      where = {}
+      where[:message_from_chain_id] = message_from_chain_id if message_from_chain_id.present?
+      where[:message_to_chain_id] = message_to_chain_id if message_to_chain_id.present?
+      ::Pug::OrmpMessageAccepted.where(where)
     end
   end
 end
