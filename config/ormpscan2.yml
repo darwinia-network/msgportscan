@@ -1,10 +1,5 @@
 default: &default
   mainnet: true
-  chains: 
-    - 1
-    - 42161
-    - 46
-    - 44
 
 development:
   <<: *default

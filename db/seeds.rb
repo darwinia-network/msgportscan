@@ -9,36 +9,49 @@
 #   end
 puts '== Start seeding'
 
+# https://chainid.network/chains.json
 puts '-- Import Pug::Network records'
-require 'open-uri'
-require 'json'
 
-networks = JSON.parse(URI.open('https://chainid.network/chains.json').read)
-networks.each do |network|
-  rpc_url = network['rpc']&.select { |url| url.start_with?('http') && url !~ /\$\{(.+)\}/ }&.first
-  explorer_url = network['explorers']&.first&.[]('url')
-  Pug::Network.create(
-    chain_id: network['chainId'],
-    name: network['shortName'].underscore,
-    display_name: network['name'],
-    rpc: rpc_url,
-    explorer: explorer_url,
-    scan_span: 2000
-  )
-end
-
-chain_id = 2_494_104_990
-name = 'tron_shasta'
-display_name = 'Tron Shasta'
-rpc = 'https://api.shasta.trongrid.io/jsonrpc'
-explorer = 'https://shasta.tronscan.org'
+chain_id = 1
+name = 'eth'
+display_name = 'Ethereum Mainnet'
+rpc = 'https://ethereum.publicnode.com'
+explorer = 'https://etherscan.io'
 Pug::Network.create(chain_id:, name:, display_name:, rpc:, explorer:, scan_span: 2000)
 
-chain_id = 728_126_428
-name = 'tron'
-display_name = 'Tron'
-rpc = 'https://api.trongrid.io/jsonrpc'
-explorer = 'https://tronscan.io'
+chain_id = 42_161
+name = 'arb1'
+display_name = 'Arbitrum One'
+rpc = 'https://arbitrum-one.publicnode.com'
+explorer = 'https://arbiscan.io'
 Pug::Network.create(chain_id:, name:, display_name:, rpc:, explorer:, scan_span: 2000)
+
+chain_id = 46
+name = 'darwinia'
+display_name = 'Darwinia Network'
+rpc = 'https://rpc.darwinia.network'
+explorer = 'https://darwinia.subscan.io'
+Pug::Network.create(chain_id:, name:, display_name:, rpc:, explorer:, scan_span: 2000)
+
+chain_id = 44
+name = 'crab'
+display_name = 'Crab Network'
+rpc = 'https://crab-rpc.darwinia.network'
+explorer = 'https://crab.subscan.io'
+Pug::Network.create(chain_id:, name:, display_name:, rpc:, explorer:, scan_span: 2000)
+
+# chain_id = 2_494_104_990
+# name = 'tron_shasta'
+# display_name = 'Tron Shasta'
+# rpc = 'https://api.shasta.trongrid.io/jsonrpc'
+# explorer = 'https://shasta.tronscan.org'
+# Pug::Network.create(chain_id:, name:, display_name:, rpc:, explorer:, scan_span: 2000)
+
+# chain_id = 728_126_428
+# name = 'tron'
+# display_name = 'Tron'
+# rpc = 'https://api.trongrid.io/jsonrpc'
+# explorer = 'https://tronscan.io'
+# Pug::Network.create(chain_id:, name:, display_name:, rpc:, explorer:, scan_span: 2000)
 
 puts "Imported #{Pug::Network.count} networks."

@@ -7,7 +7,7 @@ namespace :contracts do
   desc 'Add ormp contracts of all configurated networks'
   task add_all_ormp_contracts: :environment do
     puts '-- Update Pug::EvmContract records'
-    chain_ids = Rails.application.config.ormpscan2['chains']
+    chain_ids = Pug::Network.all.pluck(:chain_id)
 
     chain_ids.each do |chain_id|
       add_ormp_contracts(chain_id)

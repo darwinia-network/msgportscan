@@ -2,8 +2,7 @@ namespace :messages do
   desc 'Start tracing messages'
   task trace: :environment do
     $stdout.sync = true
-    chain_ids = Rails.application.config.ormpscan2['chains']
-    networks = Pug::Network.where(chain_id: chain_ids)
+    networks = Pug::Network.all
 
     loop do
       puts '== SYNCRONIZING ==============================='
@@ -87,20 +86,20 @@ def sync_accepted_messages(network)
       message = Message.create!(
         msg_hash: evm_log.decoded['msg_hash'],
         root: evm_log.decoded['root'],
-        channel: evm_log.decoded['message.channel'],
-        index: evm_log.decoded['message.index'],
-        from_chain_id: evm_log.decoded['message.from_chain_id'],
-        from: evm_log.decoded['message.from'],
-        to_chain_id: evm_log.decoded['message.to_chain_id'],
-        to: evm_log.decoded['message.to'],
-        encoded: evm_log.decoded['message.encoded'],
-        gas_limit: evm_log.decoded['message.gas_limit'],
+        channel: evm_log.decoded['message_channel'],
+        index: evm_log.decoded['message_index'],
+        from_chain_id: evm_log.decoded['message_from_chain_id'],
+        from: evm_log.decoded['message_from'],
+        to_chain_id: evm_log.decoded['message_to_chain_id'],
+        to: evm_log.decoded['message_to'],
+        encoded: evm_log.decoded['message_encoded'],
+        gas_limit: evm_log.decoded['message_gas_limit'],
         block_number: evm_log.block_number,
         block_timestamp: evm_log.timestamp,
         transaction_hash: evm_log.transaction_hash,
         status: :accepted,
         from_network: network,
-        to_network: Pug::Network.find_by_chain_id(evm_log.decoded['message.to_chain_id'])
+        to_network: Pug::Network.find_by_chain_id(evm_log.decoded['message_to_chain_id'])
       )
       raise "Message created failed: #{message.errors.full_messages}" if message.errors.any?
     end
@@ -113,8 +112,8 @@ def skip_message?(message_accepted_log, network)
 
   # 在主网环境下，从crab链发出的，但是目标不是主网链的消息，不处理
   mainnet = Rails.application.config.ormpscan2['mainnet']
-  chains = Rails.application.config.ormpscan2['chains'].map(&:to_i).reject { |chain_id| chain_id == 44 }
-  right_target_chain = chains.include?(message_accepted_log.decoded['message.to_chain_id'].to_i)
+  chains = Pug::Network.all.pluck(:chain_id).reject { |chain_id| chain_id == 44 }
+  right_target_chain = chains.include?(message_accepted_log.decoded['message_to_chain_id'].to_i)
   return true if mainnet && network.chain_id == 44 && !right_target_chain
 
   false
@@ -126,5 +125,5 @@ def latest_message_accepted_evm_logs(network)
 
   Pug::EvmLog.with_network(network)
              .with_event('MessageAccepted')
-             .where("(decoded->>'message.index')::int > ?", last_message_index)
+             .where("(decoded->>'message_index')::int > ?", last_message_index)
 end
