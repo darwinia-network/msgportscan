@@ -75,4 +75,6 @@ gem 'pug', github: 'wuminzhe/pug', branch: 'tron-models'
 # gem 'pug', path: '/workspaces/pug'
 
 gem 'dotenv', '~> 2.8'
+gem 'graphql'
 gem 'kaminari'
+gem "graphiql-rails", group: :development
