@@ -12,16 +12,14 @@ namespace :contracts do
       puts "#{i}. Chain ID: #{chain_id}"
 
       latest = JSON.parse URI.open("https://raw.githubusercontent.com/darwinia-network/ORMP/main/script/output/#{chain_id}/deploy.a-latest.json").read
-      lastest_subapi = JSON.parse URI.open("https://raw.githubusercontent.com/subapidao/subapi/main/script/output/#{chain_id}/deploy.a-latest.json").read
-      lastest_ormp_line = JSON.parse URI.open("https://raw.githubusercontent.com/darwinia-network/darwinia-msgport/main/script/output/#{chain_id}/deploy_ormp_line.a-latest.json").read
+      lastest_ormp_port = JSON.parse URI.open("https://raw.githubusercontent.com/darwinia-network/darwinia-msgport/main/script/output/#{chain_id}/deploy_ormp_port.a-latest.json").read
 
       network = Pug::Network.find_by(chain_id:)
 
       add_contract(network, latest['ORMP'])
       add_contract(network, latest['ORACLE'])
       add_contract(network, latest['RELAYER'])
-      add_contract(network, lastest_subapi['SUBAPI'])
-      add_contract(network, lastest_ormp_line['ORMP_LINE'])
+      add_contract(network, lastest_ormp_port['ORMP_PORT'])
     end
   end
 end
